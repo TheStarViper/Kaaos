@@ -3,25 +3,55 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width ,initial-scale=1">
+        <meta name="theme-color" content = "#f2abee">
         <title> Kaaos Home</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
     </head>
 <body>
-    <header>
-        <h1><a href="index.html">Kaaos</a></h1>
-        <nav>
-            <a href="images.html"><button type="button">Images</button></a>
-            <a href="docs.html"><button type="button">Documents</button></a>
-            <a href="audio.html"><button type="button">Audio</button></a>
-            <a href="video.html"><button type="button">Video</button></a>
-        </nav>
+
+    <header class = "site-header">
+        <div class="nav-pill">
+            <a class="brand" href="index.html">Kaaos</a>
+            <nav class="tabs" aria-label="Main">
+                <a class="tab" href="images.html"><button type="button">Images</button></a>
+                <a class="tab" href="docs.html"><button type="button">Documents</button></a>
+                <a class="tab" href="audio.html"><button type="button">Audio</button></a>
+                <a class="tab" href="video.html"><button type="button">Video</button></a>
+            </nav>
+        </div>
+        
     </header>
 
     <main>
-        <h2>hi</h2>
-        <p>gen placeholder files for testing stuff ig</p>
+        <section class="hero">
+            <h2>hi</h2>
+            <p>gen placeholder files for testing stuff ig</p>
+        </section>
+
+        <section class="card-grid" aria-label ="File types">
+            <a class = "card format-card" href="images.html">
+                <h3>Images</h3>
+                <p>placeholder image generator among other interesting image creation tools</p>
+            </a>
+            <a class = "card format-card" href="images.html">
+                <h3>Documents</h3>
+                <p>Filler text/Documents in various formats</p>
+            </a>
+            <a class = "card format-card" href="images.html">
+                <h3>Audio</h3>
+                <p>Placeholder tracks and tones</p>
+            </a>
+            <a class = "card format-card" href="images.html">
+                <h3>Video</h3>
+                <p>Dummy clips for testing video players and uploads</p>
+            </a>
+        </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
         <p>Kaaos</p>
     </footer>
 </body>
