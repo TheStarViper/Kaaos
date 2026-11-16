@@ -299,7 +299,48 @@ main{
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
+.pill:hover span {
+    color: var(--text);
+    border-color: var(--accent);
+}
 
+.pill input:checked + span{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-text);
+}
+
+.pill input:focus-visible + span {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    color: var(--text);
+    font: inherit;
+}
+
+.input:focus{
+    outline: 1px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent-strong);
+}
+
+.setting-row{
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+}
+.setting-row:first-of-type {
+    border-top:0;
+    padding-top:0;
+}
+
+.setting-row:last-child{ padding-bottom:0;}
 
 .btn:hover {background: var(--accent-strong);}
 
