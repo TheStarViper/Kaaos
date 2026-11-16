@@ -39,17 +39,6 @@
 *,*::before,*::after {box-sizing:border-box;}
 html {scroll-behavior: smooth;}
 
-/* .element::-webkit-scrollbar {
-  display: none;
-}
-
-.element {
-  -ms-overflow-style: none;  
-}
-
-.element {
-  scrollbar-width: none;  
-} */
 
 body{
     margin: 0;
@@ -62,6 +51,11 @@ body{
     font-size: 1.0625rem;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    overflow-y:scroll;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 body::before{
@@ -245,6 +239,67 @@ main{
     cursor: pointer;
     transition: background 0.15s ease;
 }
+
+.quick{
+    padding: 32px;
+    border-width: 1px;
+    border-color: var(--accent);
+}
+
+.quick-fields{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 16px;
+    margin: 22px 0 26px;
+}
+
+.quick-actions{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.field-label{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.pill-group{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pill {position: relative;}
+
+.pill input{
+    position: absolute;
+    inset:0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.pill span{
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface-2);
+    color: var(--muted);
+    font-weight: 600;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+
 
 .btn:hover {background: var(--accent-strong);}
 

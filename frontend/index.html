@@ -33,6 +33,43 @@
             <p>gen placeholder files for testing stuff ig</p>
         </section>
 
+        <!-- quick conv card thingy -->
+        <section class="card quick" aria-labelledby="quick-title">
+            <h3 id="quick-title">Quick Generate</h3>
+            <p class="sub">Pick a format & size to get a file</p>
+            
+            <div>
+                <span class="field-label" id="format-label">Format</span>
+                <div class="pill-group" role="radiogroup" aria-labelledby="format-label">
+                    <label class="pill"><input type = "radio" name="format" value="video" checked><span>Video</span></label>
+                    <label class="pill"><input type = "radio" name="format" value="audio" checked><span>Audio</span></label>
+                    <label class="pill"><input type = "radio" name="format" value="documents" checked><span>Documents</span></label>
+                    <label class="pill"><input type = "radio" name="format" value="images" checked><span>Images</span></label>
+                </div>
+            </div>
+
+            <div class="quick-fields">
+                <div>
+                    <label class="field-label" for="field-name">File name</label>
+                    <input class="input" id="file-name" type="text" placeholder="lorem ipsum">
+                </div>
+                <div>
+                    <label class="field-label" for="file-size">Aprrox. Size</label>
+                    <select class="input" id="file-size">
+                        <option>Small</option>
+                        <option selected>Medium</option>
+                        <option>Large</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="btn" type="button">Generate File</button>
+                <!-- fix later FIX LATER -->
+                <p class="hint">Preview only. Generating files isn't hooked up yet.</p>
+            </div>
+        </section>
+
         <section class="card-grid" aria-label ="File types">
             <a class = "card format-card" href="images.html">
                 <h3>Images</h3>
