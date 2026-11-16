@@ -11,9 +11,9 @@
 
   --topo-opacity: 0.22;
 
-  --radius-lg: 28px;
+  --radius-lg: 20px;
   --radius-md: 18px;
-  --radius-pill: 999px;
+  --radius-pill: 16px;
   --shadow: 0 10px 34px rgba(238, 92, 220, 0.18);
   --nav-bg: rgba(255, 255, 255, 0.92);
 
@@ -38,6 +38,18 @@
 
 *,*::before,*::after {box-sizing:border-box;}
 html {scroll-behavior: smooth;}
+
+/* .element::-webkit-scrollbar {
+  display: none;
+}
+
+.element {
+  -ms-overflow-style: none;  
+}
+
+.element {
+  scrollbar-width: none;  
+} */
 
 body{
     margin: 0;
@@ -89,8 +101,6 @@ a {color: inherit; text-decoration: none;}
     max-width:100%;
     padding: 6px;
     background: color-mix(in srgb, var(--surface) 85%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
     box-shadow: var(--shadow);
@@ -129,6 +139,21 @@ a {color: inherit; text-decoration: none;}
 .tab[aria-current="page"] {
   background: var(--accent);
   color: var(--accent-text);
+}
+
+.tab-sep {
+  margin-left: 8px;
+  position: relative;
+}
+
+.tab-sep::before{
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background: var(--border);
 }
 
 main{
