@@ -13,6 +13,8 @@ function getPageIndex(pathname){
     return navOrder.indexOf(file);
 }
 
+let isnavigating = false;
+
 window.addEventListener('pageswap',async(e)=>{
     if (e.viewTransition){
         const currentindex = getPageIndex(location.pathname);
@@ -39,3 +41,18 @@ window.addEventListener('pagereveal',async(e)=>{
         }
     }
 });
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a.tab, a.brand');
+    if (link) {
+        if (isnavigating) {
+            e.preventDefault();
+        } else {
+            isnavigating = true;
+        }
+    }
+});
+
+window.addEventListener('pageshow',()=>{
+    isnavigating = false;
+})
