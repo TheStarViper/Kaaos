@@ -7,3 +7,8 @@ Kaaos is a program made to solve the problem of developers not having files to u
 > The name "Kaaos" comes from the Finnish translation of "Chaos" which i felt was fitting for a random file generator.
 
 idk add some more stuff to readme later this is fine for now also those sentences above are lies lmao i dont got jack impletemented except frontend
+
+todo:
+make custom color picker component cuz it look out of place
+make custom dropdown component cuz it look out of place
+when entering over max image size ugly html popup appears so fix that

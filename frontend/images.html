@@ -35,7 +35,13 @@
       </section>
 
       <section class="card">
-        <form class="form-stack" id="image-form" autocomplete="off">
+        <form
+          class="form-stack"
+          id="image-form"
+          autocomplete="off"
+          novalidate
+          onsubmit="return false;"
+        >
           <div class="form-grid">
             <div>
               <label class="field-label" for="img-width">Width (px)</label>
@@ -74,6 +80,36 @@
             </div>
           </div>
 
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="img-color1">Color 1</label>
+              <input
+                class="input"
+                id="img-color1"
+                type="color"
+                value="#f77fe9"
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-color2">Colour 2</label>
+              <input
+                class="input"
+                id="img-color2"
+                type="color"
+                value="#2f7fe0"
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-name">File Name</label>
+              <input
+                class="input"
+                id="img-name"
+                type="text"
+                value="lorem-ipsum"
+              />
+            </div>
+          </div>
+
           <div>
             <span class="field-label" id="style-label">Style</span>
             <div
@@ -81,13 +117,13 @@
               role="radiogroup"
               aria-labelledby="style-label"
             >
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- ADD BUTTONS HERE NOTE TO SELF -->
-            <!-- spammed alot so that i can see this while scrolling-->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- ADD BUTTONS HERE NOTE TO SELF -->
+              <!-- spammed alot so that i can see this while scrolling-->
 
               <label class="pill" data-preview="solid">
                 <input type="radio" name="style" value="solid" checked />
@@ -126,36 +162,6 @@
             </div>
           </div>
 
-          <div class="form-grid">
-            <div>
-              <label class="field-label" for="img-color1">Color 1</label>
-              <input
-                class="input"
-                id="img-color1"
-                type="color"
-                value="#f77fe9"
-              />
-            </div>
-            <div>
-              <label class="field-label" for="img-color2">Colour 2</label>
-              <input
-                class="input"
-                id="img-color2"
-                type="color"
-                value="#2f7fe0"
-              />
-            </div>
-            <div>
-              <label class="field-label" for="img-name">File Name</label>
-              <input
-                class="input"
-                id="img-name"
-                type="text"
-                value="lorem-ipsum"
-              />
-            </div>
-          </div>
-
           <div class="btn-row">
             <button class="btn" id="img-generate" type="submit">
               Generate image
@@ -169,7 +175,7 @@
           </div>
 
           <div class="result" id="img-result" hidden>
-            <img id="img-preview" alt="Preview of the generated image">
+            <img id="img-preview" alt="Preview of the generated image" />
             <p class="meta" id="img-meta"></p>
             <a class="btn" id="img-download" href="#">Download</a>
           </div>
