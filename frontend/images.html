@@ -1,38 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width ,initial-scale=1">
-        <title> Kaaos Home</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <script src="navigation.js" defer></script>
-    </head>
-<body>
-    <header class = "site-header">
-        <div class="nav-pill">
-            <a class="brand" href="index.html">Kaaos</a>
-            <nav class="tabs" aria-label="Main">
-                <a class="tab" href="images.html" aria-current="page">Images</a>
-                <a class="tab" href="docs.html">Documents</a>
-                <a class="tab" href="audio.html">Audio</a>
-                <a class="tab" href="video.html">Video</a>
-                <a class="tab tab-sep" href="settings.html">Settings</a>
-                <a class="tab" href="about.html">About</a>
-            </nav>
-        </div>
-        
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width ,initial-scale=1" />
+    <title>Kaaos Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="navigation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-pill">
+        <a class="brand" href="index.html">Kaaos</a>
+        <nav class="tabs" aria-label="Main">
+          <a class="tab" href="images.html" aria-current="page">Images</a>
+          <a class="tab" href="docs.html">Documents</a>
+          <a class="tab" href="audio.html">Audio</a>
+          <a class="tab" href="video.html">Video</a>
+          <a class="tab tab-sep" href="settings.html">Settings</a>
+          <a class="tab" href="about.html">About</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <h2>images</h2>
+      <section class="hero">
+        <h2>Images</h2>
         <p>gen image placeholderse here</p>
+      </section>
+
+      <section class="card">
+        <form class="form-stack" id="image-form" autocomplete="off">
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="img-width">Width (px)</label>
+              <input
+                class="input"
+                id="img-width"
+                type="number"
+                min="1"
+                max="4000"
+                value="800"
+                required
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-height">Height (px)</label>
+              <input
+                class="input"
+                id="img-height"
+                type="number"
+                min="1"
+                max="4000"
+                value="800"
+                required
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-format">Format</label>
+              <select class="input" id="img-format">
+                <option value="png">PNG</option>
+                <option value="jpg">JPEG</option>
+                <option value="webp">WebP</option>
+                <option value="gif">GIF</option>
+                <option value="bmp">BMP</option>
+                <option value="tiff">TIFF</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <span class="field-label" id="style-label">Style</span>
+            <div
+              class="pill-group"
+              role="radiogroup"
+              aria-labelledby="style-label"
+            >
+              <label class="pill"
+                ><input type="radio" name="style" value="solid" checked /><span
+                  >Solid</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="gradient" /><span
+                  >Gradient</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="radial" /><span
+                  >Radial</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="plasma" /><span
+                  >plasma</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="checkerboard" /><span
+                  >Checkerboard</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="noise" /><span
+                  >Noise</span
+                ></label
+              >
+              <label class="pill"
+                ><input type="radio" name="style" value="topographic" /><span
+                  >Topographic</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="img-color1">Color 1</label>
+              <input
+                class="input"
+                id="img-color1"
+                type="color"
+                value="#f77fe9"
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-color2">Colour 2</label>
+              <input
+                class="input"
+                id="img-color2"
+                type="color"
+                value="#2f7fe0"
+              />
+            </div>
+            <div>
+              <label class="field-label" for="img-name">File Name</label>
+              <input
+                class="input"
+                id="img-name"
+                type="text"
+                value="lorem-ipsum"
+              />
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn" id="img-generate" type="submit">
+              Generate image
+            </button>
+            <p
+              class="status"
+              id="img-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+        </form>
+      </section>
     </main>
 
     <footer>
-        <p>Kaaos</p>
+      <p>Kaaos</p>
     </footer>
-</body>
+  </body>
 </html>
