@@ -12,3 +12,4 @@ todo:
 make custom color picker component cuz it look out of place
 make custom dropdown component cuz it look out of place
 when entering over max image size ugly html popup appears so fix that
+rip the universal error handling from hanova and put the errors in the default html alerts
