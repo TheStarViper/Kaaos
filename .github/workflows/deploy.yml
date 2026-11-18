@@ -29,7 +29,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "frontend/build/"
+          path: "frontend/"
 
   deploy:
     needs: build_site
