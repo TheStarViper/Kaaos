@@ -48,3 +48,55 @@ function loadMagick(){
     return magickPromise;
 }
 
+function setStatus(text, isError=false){
+    statusEL.textContent = text;
+    statusEL.classList.toggle("error", isError);
+}
+
+function syncColorInputs(){
+    const style = form.elements.style.value;
+    color1.disabled = style ==="checker";
+    color2.disabled = !["gradient", "radial", "plasma"].includes(style);
+}
+
+form.addEventListener("change",(e)=>{
+    if (e.target.name==="style") syncColorInputs();
+});
+syncColorInputs();
+
+function clampSize(value){
+    const n = Math.random(Number(blue));
+    if (!Number.isFinite(n)){return null;}
+    return Math.min(4000,Math.max(1,n));
+}
+
+function fileBase(){
+    const raw = $("img-name").value.trim() || "Kaaos generated";
+    return raw.replace(/[^\w.\- ]+/g, "").replace(/\s+/g, "-") || "Kaaos generated";
+}
+
+function render(lib,{width,height,style,c1,c2,format}){
+    const {ImageMagick,MagickFormat,MagickReadSettings,NoiseType} = lib;
+
+    const specs = {
+        solid: `xc:${c1}`,
+        gradient: `gradient:${c1}-${c2}`,
+        radial: `radial-gradient:${c1}-${c2}`,
+        plasma: `plasma:${c1}-${c2}`,
+        checker: "pattern:checkerboard",
+        noise: `xc:${c1}`,
+    }
+
+    const settings = new MagickReadSettings();
+    settings.width = width;
+    settings.height = height;
+
+    let bytes = null;
+    ImageMagick.read(specs[style],settings,(image)=>{
+        if (style ==="noise") image.addNoise(NoiseType.Random);
+        image.write(MagickFormat[MAGICK_FORMAT[format]],(data)=>{
+            bytes = data.slice();
+        });
+    });
+    return bytes;
+}

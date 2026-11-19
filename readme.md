@@ -14,3 +14,4 @@ make custom dropdown component cuz it look out of place
 when entering over max image size ugly html popup appears so fix that
 rip the universal error handling from hanova and put the errors in the default html alerts
 header bar moves when changing pages
+select style first then do customization after
