@@ -10,6 +10,16 @@ const download = $("img-download");
 const color1 = $("img-color1");
 const color2 = $("img-color2");
 
+function syncPreviewColors(){
+    const root = document.documentElement.style;
+    root.setProperty("--c1",color1.value);
+    root.setProperty("--c2",color2.value);
+}
+
+color1.addEventListener("input",syncPreviewColors);
+color2.addEventListener("input",syncPreviewColors);
+syncPreviewColors();
+
 const MIME = {
     png: "image/png", 
     jpg: "image/jpeg", 
@@ -64,10 +74,10 @@ form.addEventListener("change",(e)=>{
 });
 syncColorInputs();
 
-function clampSize(value){
-    const n = Math.random(Number(blue));
-    if (!Number.isFinite(n)){return null;}
-    return Math.min(4000,Math.max(1,n));
+const MAX_SIZE = 4000;
+function readSize(input) {
+  const n = Number(input.value);
+  return Number.isInteger(n) && n >= 1 && n <= MAX_SIZE ? n : null;
 }
 
 function fileBase(){
@@ -104,15 +114,15 @@ function render(lib,{width,height,style,c1,c2,format}){
 form.addEventListener("submit",async(events)=>{
     events.preventDefault();
     
-    const width = clampSize($("img-width").value);
-    const height = clampSize($("img-height").value);
-    if (!width || !height){
-        setStatus("Enter a width and height between 1-4000",true);
+    const widthInput = $("img-width");
+    const heightInput = $("img-height");
+    const width = readSize(widthInput);
+    const height = readSize(heightInput);
+    if (!width || !height) {
+        setStatus(`Width and height must be whole numbers from 1 to ${MAX_SIZE}.`, true);
+        (!width ? widthInput : heightInput).focus();
         return;
     }
-    
-    $("img-width").value = width;
-    $("img-height").value = height;
 
     const format = $("img-format").value;
     button.disabled=true;
