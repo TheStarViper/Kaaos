@@ -48,3 +48,53 @@ function makeNoise(rand){
     };
 }
 
+function buildField(cols,rows,scale,seed){
+    const rand = mulberry32(seed);
+    const noise = makeNoise(rand);
+    const octaves = [1,2,4].map((freq,i)=>({
+        freq,
+        amp: 1/2**i,
+        ox: rand()*500,
+        oy: rand()*500,
+    }));
+
+    const stride = cols+1;
+    const field = new Float32Array(stride*(rows+1));
+    const long = Math.max(cols,rows);
+    let min = Infinity, max=-Infinity;
+
+    for(let j = 0; j<=rows;j++){
+        for (let i =0;i<=cols;i++){
+            const nx = (i/long)*scale;
+            const ny = (j/long)*scale;
+            let v = 0;
+
+            for (const o of octaves) {
+                v+=o.amp*noise(nx * o.freq + o.ox, ny * o.freq + o.oy);
+            }
+            field[j * stride + i] = v;
+            if (v < min) min = v;
+            if (v > max) max = v;
+        }
+    }
+
+    const span = max-min||1;
+    for (let k=0;k<field.length;k++){
+        field[k]=(field[k]-min)/span;
+    }
+    return field;
+}
+
+function contourSegments(field,cols,rows,level,emit){
+    const stride = cols+1;
+    for (let j = 0;j<rows;j++){
+        for (let i = 0;i<cols;i++){
+            const a = field[j * stride + i];            // top-left
+            const b = field[j * stride + i + 1];        // top-right
+            const c = field[(j + 1) * stride + i + 1];  // bottom-right
+            const d = field[(j + 1) * stride + i];      // bottom-left
+
+            const idx = (a>level)
+        }
+    }
+}
