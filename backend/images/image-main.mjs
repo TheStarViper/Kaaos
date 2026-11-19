@@ -100,3 +100,59 @@ function render(lib,{width,height,style,c1,c2,format}){
     });
     return bytes;
 }
+
+form.addEventListener("submit",async(events)=>{
+    events.preventDefault();
+    
+    const width = clampSize($("img-width").value);
+    const height = clampSize($("img-height").value);
+    if (!width || !height){
+        setStatus("Enter a width and height between 1-4000",true);
+        return;
+    }
+    
+    $("img-width").value = width;
+    $("img-height").value = height;
+
+    const format = $("img-format").value;
+    button.disabled=true;
+    setStatus("Loading Imagemagick");
+
+    try{
+        const lib = await loadMagick();
+        setStatus("Generating");
+
+        await new Promise((r)=>requestAnimationFrame(()=>setTimeout(r,0)));
+        const started = performance.now();
+        const bytes = render(lib,{
+            width,
+            height,
+            format,
+            style: form.elements.style.value,
+            c1: color1.value,
+            c2: color2.value,
+        });
+
+        if (!bytes||!bytes.length) {throw new Error("No image data was produced");}
+        const blob = new Blob([bytes],{type:MIME[format]});
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
+        objectUrl = URL.createObjectURL(blob);
+
+        const filename = `${fileBase()}.${format}`;
+        preview.alt = `Generated ${width} by ${height} ${format.toUpperCase()} image`;
+        preview.src = objectUrl;
+        download.href = objectUrl;
+        download.download = filename;
+        meta.textContent =
+        `${filename} · ${width}×${height} · ${(blob.size / 1024).toFixed(1)} KB` +
+        (format === "tiff" ? " · browsers can't preview TIFF, but the download works" : "");
+
+        result.hidden = false;
+        setStatus(`Done in ${Math.round(performance.now()-started)} ms.`);
+    } catch (error){
+        console.error(error);
+        setStatus(`Something went wrong: ${err.message || err}`, true);
+    } finally {
+        button.disabled = false;
+    }
+});
