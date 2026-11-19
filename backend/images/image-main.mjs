@@ -65,8 +65,8 @@ function setStatus(text, isError=false){
 
 function syncColorInputs(){
     const style = form.elements.style.value;
-    color1.disabled = style ==="checker";
-    color2.disabled = !["gradient", "radial", "plasma"].includes(style);
+    // color1.disabled = style ==="checker";
+    color2.disabled = !["gradient", "radial", "plasma","checker"].includes(style);
 }
 
 form.addEventListener("change",(e)=>{
