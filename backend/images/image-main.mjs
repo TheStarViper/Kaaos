@@ -71,7 +71,12 @@ function loadMagick(){
     return magickPromise;
 }
 
-const nextPaint = () => new Promise ((r)=>requestAnimationFrame(()=>setTimeout(r,0)));
+const nextPaint = () =>
+    new Promise((resolve)=>{
+        requestAnimationFrame(()=>setTimeout(resolve,0));
+        setTimeout(resolve,100);
+    });
+
 function setStatus(text, isError=false){
     statusEL.textContent = text;
     statusEL.classList.toggle("error", isError);
@@ -126,7 +131,16 @@ function render(lib,{width,height,style,c1,c2,format}){
     return bytes;
 }
 
-
+function convertPng(lib,png,format){
+    const {ImageMagick,MagickFormat}=lib;
+    let bytes = null;
+    ImageMagick.read(png,(image)=>{
+        image.write(MagickFormat[MAGICK_FORMAT[format]],(data)=>{
+            bytes=data.slice();
+        });
+    });
+    return bytes;
+}
 
 form.addEventListener("submit",async(events)=>{
     events.preventDefault();
@@ -142,23 +156,48 @@ form.addEventListener("submit",async(events)=>{
     }
 
     const format = $("img-format").value;
+    const style = form.elements.style.value;
     button.disabled=true;
     setStatus("Loading Imagemagick");
 
     try{
-        const lib = await loadMagick();
-        setStatus("Generating");
-
-        await new Promise((r)=>requestAnimationFrame(()=>setTimeout(r,0)));
         const started = performance.now();
-        const bytes = render(lib,{
-            width,
-            height,
-            format,
-            style: form.elements.style.value,
-            c1: color1.value,
-            c2: color2.value,
-        });
+        let bytes;
+        let seedUsed = null;
+
+        if (style==="topo"){
+            setStatus("Generating");
+            await nextPaint();
+            const seedText = topoSeed.value.trim();
+            seedUsed = seedText ===""?Math.floor(Math.random()*1_000_000):Math.floor(Number(seedText))||0;
+            const png = await renderTopoPng({
+                width,height,seed:seedUsed,
+                background: color1.value,
+                lineColor: color2.value,
+                levels: Number(topoLevels.value),
+                scale: Number(topoScale.value),
+            });
+
+            if (format==="png"){
+                bytes=png;
+            } else {
+                setStatus("Loading imagemagick");
+                bytes = convertPng(await loadMagick(),png,format);
+            }
+        } else {
+            setStatus("Loading imagemagick");
+            const lib = await loadMagick();
+            setStatus("Generating");
+            await nextPaint();
+            const bytes = render(lib,{
+                width,
+                height,
+                format,
+                style: form.elements.style.value,
+                c1: color1.value,
+                c2: color2.value,
+            });
+        }
 
         if (!bytes||!bytes.length) {throw new Error("No image data was produced");}
         const blob = new Blob([bytes],{type:MIME[format]});
@@ -172,6 +211,7 @@ form.addEventListener("submit",async(events)=>{
         download.download = filename;
         meta.textContent =
         `${filename} · ${width}×${height} · ${(blob.size / 1024).toFixed(1)} KB` +
+        (seedUsed !== null ? ` · seed ${seedUsed}` : "") +
         (format === "tiff" ? " · browsers can't preview TIFF, but the download works" : "");
 
         result.hidden = false;
