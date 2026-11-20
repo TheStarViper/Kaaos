@@ -155,13 +155,27 @@
                 ></label
               >
               <label class="pill" data-preview="topo"
-                ><input type="radio" name="style" value="topographic" /><span
+                ><input type="radio" name="style" value="topo" /><span
                   >Topographic</span
                 ></label
               >
             </div>
           </div>
 
+          <div class="form-grid" id="topo-options" hidden>
+            <div>
+                <label class="field-label" for="topo-levels">Contour lines:<output id="topo-levels-out">18</output></label>
+                <input class="range" id="topo-levels" type="range" min="6" max="40" value="18">
+            </div>
+            <div>
+                <label class="field-label" for="topo-scale">Hills across: <output id="topo-scale-out">3</output></label>
+                <input class="range" id="topo-scale" type="range" min="1" max="10" value="3">
+            </div>
+            <div>
+                <label class="field-label" for="topo-seed">Seed</label>
+                <input class="input" id="topo-seed" type="number" min="0" placeholder="Random">
+            </div>
+          </div>
           <div class="btn-row">
             <button class="btn" id="img-generate" type="submit">
               Generate image

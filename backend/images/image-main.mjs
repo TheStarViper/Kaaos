@@ -1,3 +1,5 @@
+import { renderTopoPng } from "./topo.mjs";
+
 const $ = (id) => document.getElementById(id);
 
 const form = $("image-form");
@@ -9,6 +11,17 @@ const meta = $("img-meta");
 const download = $("img-download");
 const color1 = $("img-color1");
 const color2 = $("img-color2");
+const topoOptions = $("topo-options");
+const topoLevels = $("topo-levels");
+const topoScale = $("topo-scale");
+const topoSeed = $("topo-seed");
+
+for (const range of [topoLevels, topoScale]) {
+  const out = $(`${range.id}-out`);
+  const update = () => (out.textContent = range.value);
+  range.addEventListener("input", update);
+  update();
+}
 
 function syncPreviewColors(){
     const root = document.documentElement.style;
@@ -58,6 +71,7 @@ function loadMagick(){
     return magickPromise;
 }
 
+const nextPaint = () => new Promise ((r)=>requestAnimationFrame(()=>setTimeout(r,0)));
 function setStatus(text, isError=false){
     statusEL.textContent = text;
     statusEL.classList.toggle("error", isError);
@@ -66,7 +80,8 @@ function setStatus(text, isError=false){
 function syncColorInputs(){
     const style = form.elements.style.value;
     // color1.disabled = style ==="checker";
-    color2.disabled = !["gradient", "radial", "plasma","checker"].includes(style);
+    color2.disabled = !["gradient", "radial", "plasma","checker","topo"].includes(style);
+    topoOptions.hidden = style !== "topo";
 }
 
 form.addEventListener("change",(e)=>{
@@ -110,6 +125,8 @@ function render(lib,{width,height,style,c1,c2,format}){
     });
     return bytes;
 }
+
+
 
 form.addEventListener("submit",async(events)=>{
     events.preventDefault();
