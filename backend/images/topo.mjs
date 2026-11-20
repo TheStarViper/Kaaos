@@ -35,11 +35,12 @@ function makeNoise(rand){
     };
 
     return (x,y)=>{
-        const xi = Math.floor(x),yi=math.floor(y);
-        const xf = x-xi,yf = y-yi;
-        const X = xi&255, Y = yi&255;
-        const u = fade(xf),v=fade(yf);
-        const aa = perm[perm[X]+Y],ab=perm[perm[X+1]+Y+1];
+        const xi = Math.floor(x), yi = Math.floor(y);
+        const xf = x-xi, yf=y- yi;
+        const X = xi & 255,Y = yi & 255;
+        const u = fade(xf),v = fade(yf);
+        const aa = perm[perm[X]+Y], ab =perm[perm[X]+Y+1];
+        const ba = perm[perm[X+1]+Y], bb =perm[perm[X+1]+Y+1];
         return lerp(
             lerp(grad(aa,xf,yf),grad(ba,xf-1,yf),u),
             lerp(grad(ab,xf,yf-1),grad(bb,xf-1,yf-1),u),

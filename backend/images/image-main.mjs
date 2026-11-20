@@ -4,7 +4,7 @@ const $ = (id) => document.getElementById(id);
 
 const form = $("image-form");
 const button = $("img-generate");
-const statusEL = $("img-status");
+const statusEl = $("img-status");
 const result = $("img-result");
 const preview = $("img-preview");
 const meta = $("img-meta");
@@ -78,8 +78,8 @@ const nextPaint = () =>
     });
 
 function setStatus(text, isError=false){
-    statusEL.textContent = text;
-    statusEL.classList.toggle("error", isError);
+    statusEl.textContent = text;
+    statusEl.classList.toggle("error", isError);
 }
 
 function syncColorInputs(){
@@ -189,7 +189,7 @@ form.addEventListener("submit",async(events)=>{
             const lib = await loadMagick();
             setStatus("Generating");
             await nextPaint();
-            const bytes = render(lib,{
+            bytes = render(lib,{
                 width,
                 height,
                 format,
@@ -218,7 +218,7 @@ form.addEventListener("submit",async(events)=>{
         setStatus(`Done in ${Math.round(performance.now()-started)} ms.`);
     } catch (error){
         console.error(error);
-        setStatus(`Something went wrong: ${err.message || err}`, true);
+        setStatus(`Something went wrong: ${error.message || error}`, true);
     } finally {
         button.disabled = false;
     }
