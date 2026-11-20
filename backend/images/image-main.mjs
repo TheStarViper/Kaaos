@@ -17,10 +17,13 @@ const topoScale = $("topo-scale");
 const topoSeed = $("topo-seed");
 
 for (const range of [topoLevels, topoScale]) {
-  const out = $(`${range.id}-out`);
-  const update = () => (out.textContent = range.value);
-  range.addEventListener("input", update);
-  update();
+    const out = $(`${range.id}-out`);
+    const update = () => {
+        out.textContent = range.value
+        range.style.setProperty("--p",(range.value-range.min)/(range.max-range.min));
+    };
+    range.addEventListener("input", update);
+    update();
 }
 
 function syncPreviewColors(){
