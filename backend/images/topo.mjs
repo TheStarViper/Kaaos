@@ -49,12 +49,12 @@ function makeNoise(rand){
     };
 }
 
-function buildField(cols,rows,scale,seed){
+function buildField(cols,rows,scale,seed,smoothing){
     const rand = mulberry32(seed);
     const noise = makeNoise(rand);
     const octaves = [1,2,4].map((freq,i)=>({
         freq,
-        amp: 1/2**i,
+        amp: i===0?1:(1/2**i)*(1-smoothing),
         ox: rand()*500,
         oy: rand()*500,
     }));
@@ -119,13 +119,13 @@ function contourSegments(field,cols,rows,level,emit){
 }
 
 export async function renderTopoPng({
-    width,height,background,lineColor,levels=18,scale=3,seed=1,
+    width,height,background,lineColor,levels=18,scale=3,seed=1,smoothing=0,
 }){
     const cell = Math.max(3,Math.ceil(Math.max(width,height)/1000));
     const cols = Math.max(1,Math.ceil(width/cell));
     const rows = Math.max(1,Math.ceil(height/cell));
 
-    const field = buildField(cols,rows,scale,seed);
+    const field = buildField(cols,rows,scale,seed,smoothing);
     const canvas = document.createElement("canvas");
 
     canvas.width = width;

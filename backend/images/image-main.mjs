@@ -11,12 +11,15 @@ const meta = $("img-meta");
 const download = $("img-download");
 const color1 = $("img-color1");
 const color2 = $("img-color2");
+
+//topo vals
 const topoOptions = $("topo-options");
 const topoLevels = $("topo-levels");
 const topoScale = $("topo-scale");
 const topoSeed = $("topo-seed");
+const topoSmooth = $("topo-smooth");
 
-for (const range of [topoLevels, topoScale]) {
+for (const range of [topoLevels, topoScale,topoSmooth]) {
     const out = $(`${range.id}-out`);
     const update = () => {
         out.textContent = range.value
@@ -179,6 +182,7 @@ form.addEventListener("submit",async(events)=>{
                 lineColor: color2.value,
                 levels: Number(topoLevels.value),
                 scale: Number(topoScale.value),
+                smoothing: Number(topoSmooth.value)/10,
             });
 
             if (format==="png"){
