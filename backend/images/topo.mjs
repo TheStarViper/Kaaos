@@ -42,7 +42,7 @@ function makeNoise(rand){
         const aa = perm[perm[X]+Y],ab=perm[perm[X+1]+Y+1];
         return lerp(
             lerp(grad(aa,xf,yf),grad(ba,xf-1,yf),u),
-            lerp(grad(ab,xf,yf-1),grad(bb,xf-1,yf-1),u)m,
+            lerp(grad(ab,xf,yf-1),grad(bb,xf-1,yf-1),u),
             v
         );
     };
@@ -94,7 +94,73 @@ function contourSegments(field,cols,rows,level,emit){
             const c = field[(j + 1) * stride + i + 1];  // bottom-right
             const d = field[(j + 1) * stride + i];      // bottom-left
 
-            const idx = (a>level)
+            const idx = (a>level?8:0) | (b>level?4:0) | (c>level?2:0) | (d>level?1:0);
+            if (idx===0||idx===15) continue;
+
+            const tx = i + (level - a) / (b - a); // top edge
+            const bx = i + (level - d) / (c - d); // bottom edge
+            const ly = j + (level - a) / (d - a); // left edge
+            const ry = j + (level - b) / (c - b); // right edge
+            const x0 = i, x1 = i + 1, y0 = j, y1 = j + 1;
+
+            switch (idx){
+                case 1: case 14: emit(x0,ly,bx,y1); break;
+                case 2: case 13: emit(bx,y1,x1,ry); break;
+                case 3: case 12: emit(x0,ly,x1,ry); break;
+                case 4: case 11: emit(tx,y0,x1,ry); break;
+                case 5: emit(tx,y0,x1,ry); emit(x0,ly,bx,y1); break;
+                case 6: case 9: emit(tx,y0,bx,y1); break;
+                case 7: case 8: emit(x0,ly,tx,y0); break;
+                case 10: emit(x0,ly,tx,y0); emit(bx,y1,x1,ry); break;
+            }
         }
     }
+}
+
+export async function renderTopoPng({
+    width,height,background,lineColor,levels=18,scale=3,seed=1,
+}){
+    const cell = Math.max(3,Math.ceil(Math.max(width,height)/1000));
+    const cols = Math.max(1,Math.ceil(width/cell));
+    const rows = Math.max(1,Math.ceil(height/cell));
+
+    const field = buildField(cols,rows,scale,seed);
+    const canvas = document.createElement("canvas");
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx){
+        throw new Error("Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)");
+    }
+
+    ctx.fillStyle = background;
+    ctx.fillRect(0,0,width,height);
+
+    ctx.strokeStyle = lineColor;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    const baseWidth = Math.max(1,Math.min(width,height)/450);
+
+    for (let k =0;k<levels;k++){
+        const level = 0.06 + (0.88*(k+0.5))/levels;
+        const major = k%5===0;
+
+        ctx.lineWidth = major?baseWidth*2:baseWidth;
+        ctx.globalAlpha = major ? 1 : 0.7;
+        ctx.beginPath();
+
+        contourSegments(field,cols,rows,level,(x1,y1,x2,y2)=>{
+            ctx.moveTo(x1*cell,y1*cell);
+            ctx.lineTo(x2*cell,y2*cell);
+        });
+        ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    
+    const blob = await new Promise((resolve)=>canvas.toBlob(resolve,"image/png"));
+    if (!blob) {throw new Error("Couldnt create the image (might be too big for this browser)");}
+    return new Uint8Array(await blob.arrayBuffer());
 }
