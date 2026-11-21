@@ -1,277 +1,276 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width ,initial-scale=1" />
-    <title>Kaaos Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <script src="navigation.js" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="nav-pill">
-        <a class="brand" href="index.html">Kaaos</a>
-        <nav class="tabs" aria-label="Main">
-          <a class="tab" href="images.html" aria-current="page">Images</a>
-          <a class="tab" href="docs.html">Documents</a>
-          <a class="tab" href="audio.html">Audio</a>
-          <a class="tab" href="video.html">Video</a>
-          <a class="tab tab-sep" href="settings.html">Settings</a>
-          <a class="tab" href="about.html">About</a>
-        </nav>
-      </div>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width ,initial-scale=1" />
+		<title>Kaaos Home</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<script src="navigation.js" defer></script>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="nav-pill">
+				<a class="brand" href="index.html">Kaaos</a>
+				<nav class="tabs" aria-label="Main">
+					<a class="tab" href="images.html" aria-current="page">Images</a>
+					<a class="tab" href="docs.html">Documents</a>
+					<a class="tab" href="audio.html">Audio</a>
+					<a class="tab" href="video.html">Video</a>
+					<a class="tab tab-sep" href="settings.html">Settings</a>
+					<a class="tab" href="about.html">About</a>
+				</nav>
+			</div>
+		</header>
 
-    <main>
-      <section class="hero">
-        <h2>Images</h2>
-        <p>gen image placeholderse here</p>
-      </section>
+		<main>
+			<section class="hero">
+				<h2>Images</h2>
+				<p>gen image placeholderse here</p>
+			</section>
 
-      <section class="card">
-        <form
-          class="form-stack"
-          id="image-form"
-          autocomplete="off"
-          novalidate
-          onsubmit="return false;"
-        >
-          <div>
-            <span class="field-label" id="style-label"
-              >What do you want to make?</span
-            >
-            <div
-              class="pill-group"
-              role="radiogroup"
-              aria-labelledby="style-label"
-            >
-              <label class="pill" data-preview="solid"
-                ><input type="radio" name="style" value="solid" /><span
-                  >Solid</span
-                ></label
-              >
-              <label class="pill" data-preview="gradient"
-                ><input type="radio" name="style" value="gradient" /><span
-                  >Gradient</span
-                ></label
-              >
-              <label class="pill" data-preview="radial"
-                ><input type="radio" name="style" value="radial" /><span
-                  >Radial</span
-                ></label
-              >
-              <label class="pill" data-preview="plasma"
-                ><input type="radio" name="style" value="plasma" /><span
-                  >Plasma</span
-                ></label
-              >
-              <label class="pill" data-preview="checker"
-                ><input type="radio" name="style" value="checker" /><span
-                  >Checkerboard</span
-                ></label
-              >
-              <label class="pill" data-preview="noise"
-                ><input type="radio" name="style" value="noise" /><span
-                  >Noise</span
-                ></label
-              >
-              <label class="pill" data-preview="topo"
-                ><input type="radio" name="style" value="topo" /><span
-                  >Topographic</span
-                ></label
-              >
-            </div>
-            <p class="hint" id="img-pick-hint">
-              Pick a style to see its options.
-            </p>
-          </div>
+			<section class="card">
+				<form
+					class="form-stack"
+					id="image-form"
+					autocomplete="off"
+					novalidate
+					onsubmit="return false;"
+				>
+					<div>
+						<span class="field-label" id="style-label">
+							What do you want to make?
+						</span>
+						<div
+							class="pill-group"
+							role="radiogroup"
+							aria-labelledby="style-label"
+						>
+							<label class="pill" data-preview="solid">
+								<input type="radio" name="style" value="solid" />
+								<span>Solid</span>
+							</label>
+							<label class="pill" data-preview="gradient">
+								<input type="radio" name="style" value="gradient" />
+								<span>Gradient</span>
+							</label>
+							<label class="pill" data-preview="radial">
+								<input type="radio" name="style" value="radial" />
+								<span>Radial</span>
+							</label>
+							<label class="pill" data-preview="plasma">
+								<input type="radio" name="style" value="plasma" />
+								<span>Plasma</span>
+							</label>
+							<label class="pill" data-preview="checker">
+								<input type="radio" name="style" value="checker" />
+								<span>Checkerboard</span>
+							</label>
+							<label class="pill" data-preview="noise">
+								<input type="radio" name="style" value="noise" />
+								<span>Noise</span>
+							</label>
+							<label class="pill" data-preview="topo">
+								<input type="radio" name="style" value="topo" />
+								<span>Topographic</span>
+							</label>
+						</div>
+						<p class="hint" id="img-pick-hint">
+							Pick a style to see its options.
+						</p>
+					</div>
 
-          <div class="form-stack" id="img-options" hidden>
-            <div class="form-grid">
-              <div>
-                <label class="field-label" for="img-width">Width (px)</label>
-                <input
-                  class="input"
-                  id="img-width"
-                  type="number"
-                  min="1"
-                  max="4000"
-                  value="800"
-                  required
-                />
-              </div>
-              <div>
-                <label class="field-label" for="img-height">Height (px)</label>
-                <input
-                  class="input"
-                  id="img-height"
-                  type="number"
-                  min="1"
-                  max="4000"
-                  value="600"
-                  required
-                />
-              </div>
-              <div>
-                <label class="field-label" for="img-format">Format</label>
-                <select class="input" id="img-format">
-                  <option value="png">PNG</option>
-                  <option value="jpg">JPEG</option>
-                  <option value="webp">WebP</option>
-                  <option value="gif">GIF</option>
-                  <option value="bmp">BMP</option>
-                  <option value="tiff">TIFF</option>
-                </select>
-              </div>
-            </div>
+					<div class="form-stack" id="img-options" hidden>
+						<div class="form-grid">
+							<div>
+								<label class="field-label" for="img-width">Width (px)</label>
+								<input
+									class="input"
+									id="img-width"
+									type="number"
+									min="1"
+									max="4000"
+									value="800"
+									required
+								/>
+							</div>
+							<div>
+								<label class="field-label" for="img-height">Height (px)</label>
+								<input
+									class="input"
+									id="img-height"
+									type="number"
+									min="1"
+									max="4000"
+									value="600"
+									required
+								/>
+							</div>
+							<div>
+								<label class="field-label" for="img-format">Format</label>
+								<select class="input" id="img-format">
+									<option value="png">PNG</option>
+									<option value="jpg">JPEG</option>
+									<option value="webp">WebP</option>
+									<option value="gif">GIF</option>
+									<option value="bmp">BMP</option>
+									<option value="tiff">TIFF</option>
+								</select>
+							</div>
+						</div>
 
-            <div class="form-grid">
-              <div data-styles="solid gradient radial plasma noise topo">
-                <label
-                  class="field-label"
-                  id="img-color1-label"
-                  for="img-color1"
-                  >Color</label
-                >
-                <input
-                  class="input"
-                  id="img-color1"
-                  type="color"
-                  value="#f77fe9"
-                />
-              </div>
-              <div data-styles="gradient radial plasma topo">
-                <label
-                  class="field-label"
-                  id="img-color2-label"
-                  for="img-color2"
-                  >Color 2</label
-                >
-                <input
-                  class="input"
-                  id="img-color2"
-                  type="color"
-                  value="#2f7fe0"
-                />
-              </div>
-              <div>
-                <label class="field-label" for="img-name">File name</label>
-                <input
-                  class="input"
-                  id="img-name"
-                  type="text"
-                  placeholder="lorem-ipsum"
-                />
-              </div>
-            </div>
+						<div class="form-grid">
+							<div data-styles="solid gradient radial plasma noise topo">
+								<label
+									class="field-label"
+									id="img-color1-label"
+									for="img-color1"
+								>
+									Color
+								</label>
+								<input
+									class="input"
+									id="img-color1"
+									type="color"
+									value="#f77fe9"
+								/>
+							</div>
+							<div data-styles="gradient radial plasma topo">
+								<label
+									class="field-label"
+									id="img-color2-label"
+									for="img-color2"
+								>
+									Color 2
+								</label>
+								<input
+									class="input"
+									id="img-color2"
+									type="color"
+									value="#2f7fe0"
+								/>
+							</div>
+							<div>
+								<label class="field-label" for="img-name">File name</label>
+								<input
+									class="input"
+									id="img-name"
+									type="text"
+									placeholder="lorem-ipsum"
+								/>
+							</div>
+						</div>
 
-            <div class="form-grid" id="topo-options" data-styles="topo">
-              <div>
-                <div class="label-row">
-                  <label class="field-label" for="topo-levels"
-                    >Contour lines:
-                    <output id="topo-levels-out">18</output></label
-                  >
-                  <button
-                    class="help"
-                    type="button"
-                    aria-label="What are contour lines?"
-                    aria-describedby="help-levels"
-                  >
-                    ?<span class="help-tip" role="tooltip" id="help-levels"
-                      >How many height levels are drawn as lines. More lines
-                      make a more dense and detailed map. Fewer make a simpler,
-                      cleaner one. Every fifth line is drawn thicker.</span
-                    >
-                  </button>
-                </div>
-                <input
-                  class="range"
-                  id="topo-levels"
-                  type="range"
-                  min="6"
-                  max="40"
-                  value="18"
-                />
-              </div>
-              <div>
-                <div class="label-row">
-                  <label class="field-label" for="topo-scale"
-                    >Hills across: <output id="topo-scale-out">3</output></label
-                  >
-                  <button
-                    class="help"
-                    type="button"
-                    aria-label="What does hills across mean?"
-                    aria-describedby="help-scale"
-                  >
-                    ?<span class="help-tip" role="tooltip" id="help-scale"
-                      >How many hills fit across the width of the image. Low
-                      numbers give a few big hills and valleys and high numbers
-                      give lots of small tightly packed ones.</span
-                    >
-                  </button>
-                </div>
-                <input
-                  class="range"
-                  id="topo-scale"
-                  type="range"
-                  min="1"
-                  max="10"
-                  value="3"
-                />
-              </div>
-              <div>
-                <label class="field-label" for="topo-smooth"
-                  >Smoothing: <output id="topo-smooth-out">0</output></label
-                >
-                <input
-                  class="range"
-                  id="topo-smooth"
-                  type="range"
-                  min="0"
-                  max="10"
-                  value="0"
-                />
-              </div>
-              <div>
-                <label class="field-label" for="topo-seed">Seed</label>
-                <input
-                  class="input"
-                  id="topo-seed"
-                  type="number"
-                  min="0"
-                  placeholder="Random"
-                />
-              </div>
-            </div>
+						<div class="form-grid" id="topo-options" data-styles="topo">
+							<div>
+								<div class="label-row">
+									<label class="field-label" for="topo-levels">
+										Contour lines:
+										<output id="topo-levels-out">18</output>
+									</label>
+									<button
+										class="help"
+										type="button"
+										aria-label="What are contour lines?"
+										aria-describedby="help-levels"
+									>
+										?
+										<span class="help-tip" role="tooltip" id="help-levels">
+											How many height levels are drawn as lines. More lines make
+											a more dense and detailed map. Fewer make a simpler,
+											cleaner one. Every fifth line is drawn thicker.
+										</span>
+									</button>
+								</div>
+								<input
+									class="range"
+									id="topo-levels"
+									type="range"
+									min="6"
+									max="40"
+									value="18"
+								/>
+							</div>
+							<div>
+								<div class="label-row">
+									<label class="field-label" for="topo-scale">
+										Hills across:
+										<output id="topo-scale-out">3</output>
+									</label>
+									<button
+										class="help"
+										type="button"
+										aria-label="What does hills across mean?"
+										aria-describedby="help-scale"
+									>
+										?
+										<span class="help-tip" role="tooltip" id="help-scale">
+											How many hills fit across the width of the image. Low
+											numbers give a few big hills and valleys and high numbers
+											give lots of small tightly packed ones.
+										</span>
+									</button>
+								</div>
+								<input
+									class="range"
+									id="topo-scale"
+									type="range"
+									min="1"
+									max="10"
+									value="3"
+								/>
+							</div>
+							<div>
+								<label class="field-label" for="topo-smooth">
+									Smoothing:
+									<output id="topo-smooth-out">0</output>
+								</label>
+								<input
+									class="range"
+									id="topo-smooth"
+									type="range"
+									min="0"
+									max="10"
+									value="0"
+								/>
+							</div>
+							<div>
+								<label class="field-label" for="topo-seed">Seed</label>
+								<input
+									class="input"
+									id="topo-seed"
+									type="number"
+									min="0"
+									placeholder="Random"
+								/>
+							</div>
+						</div>
 
-            <div class="btn-row">
-              <button class="btn" id="img-generate" type="submit">
-                Generate image
-              </button>
-              <p
-                class="status"
-                id="img-status"
-                role="status"
-                aria-live="polite"
-              ></p>
-            </div>
-          </div>
-        </form>
-      </section>
-    </main>
+						<div class="btn-row">
+							<button class="btn" id="img-generate" type="submit">
+								Generate image
+							</button>
+							<p
+								class="status"
+								id="img-status"
+								role="status"
+								aria-live="polite"
+							></p>
+						</div>
+					</div>
+				</form>
+			</section>
+		</main>
 
-    <script type="module" src="/backend/images/image-main.mjs"></script>
+		<script type="module" src="/backend/images/image-main.mjs"></script>
 
-    <footer>
-      <p>Kaaos</p>
-    </footer>
-  </body>
+		<footer>
+			<p>Kaaos</p>
+		</footer>
+	</body>
 </html>

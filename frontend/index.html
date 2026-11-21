@@ -1,129 +1,122 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width ,initial-scale=1" />
-    <meta name="theme-color" content="#f2abee" />
-    <title>Kaaos Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <script src="navigation.js" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="nav-pill">
-        <a class="brand" href="index.html">Kaaos</a>
-        <nav class="tabs" aria-label="Main">
-          <a class="tab" href="images.html">Images</a>
-          <a class="tab" href="docs.html">Documents</a>
-          <a class="tab" href="audio.html">Audio</a>
-          <a class="tab" href="video.html">Video</a>
-          <a class="tab tab-sep" href="settings.html">Settings</a>
-          <a class="tab" href="about.html">About</a>
-        </nav>
-      </div>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width ,initial-scale=1" />
+		<meta name="theme-color" content="#f2abee" />
+		<title>Kaaos Home</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<script src="navigation.js" defer></script>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="nav-pill">
+				<a class="brand" href="index.html">Kaaos</a>
+				<nav class="tabs" aria-label="Main">
+					<a class="tab" href="images.html">Images</a>
+					<a class="tab" href="docs.html">Documents</a>
+					<a class="tab" href="audio.html">Audio</a>
+					<a class="tab" href="video.html">Video</a>
+					<a class="tab tab-sep" href="settings.html">Settings</a>
+					<a class="tab" href="about.html">About</a>
+				</nav>
+			</div>
+		</header>
 
-    <main>
-      <section class="hero">
-        <h2>hi</h2>
-        <p>gen placeholder files for testing stuff ig</p>
-      </section>
+		<main>
+			<section class="hero">
+				<h2>hi</h2>
+				<p>gen placeholder files for testing stuff ig</p>
+			</section>
 
-      <!-- quick conv card thingy -->
-      <section class="card quick" aria-labelledby="quick-title">
-        <h3 id="quick-title">Quick Generate</h3>
-        <p class="sub">Pick a format & size to get a file</p>
+			<!-- quick conv card thingy -->
+			<section class="card quick" aria-labelledby="quick-title">
+				<h3 id="quick-title">Quick Generate</h3>
+				<p class="sub">Pick a format & size to get a file</p>
 
-        <div>
-          <span class="field-label" id="format-label">Format</span>
-          <div
-            class="pill-group"
-            role="radiogroup"
-            aria-labelledby="format-label"
-          >
-            <label class="pill"
-              ><input type="radio" name="format" value="video" checked /><span
-                >Video</span
-              ></label
-            >
-            <label class="pill"
-              ><input type="radio" name="format" value="audio" checked /><span
-                >Audio</span
-              ></label
-            >
-            <label class="pill"
-              ><input
-                type="radio"
-                name="format"
-                value="documents"
-                checked
-              /><span>Documents</span></label
-            >
-            <label class="pill"
-              ><input type="radio" name="format" value="images" checked /><span
-                >Images</span
-              ></label
-            >
-          </div>
-        </div>
+				<div>
+					<span class="field-label" id="format-label">Format</span>
+					<div
+						class="pill-group"
+						role="radiogroup"
+						aria-labelledby="format-label"
+					>
+						<label class="pill">
+							<input type="radio" name="format" value="video" checked />
+							<span>Video</span>
+						</label>
+						<label class="pill">
+							<input type="radio" name="format" value="audio" checked />
+							<span>Audio</span>
+						</label>
+						<label class="pill">
+							<input type="radio" name="format" value="documents" checked />
+							<span>Documents</span>
+						</label>
+						<label class="pill">
+							<input type="radio" name="format" value="images" checked />
+							<span>Images</span>
+						</label>
+					</div>
+				</div>
 
-        <div class="quick-fields">
-          <div>
-            <label class="field-label" for="field-name">File name</label>
-            <input
-              class="input"
-              id="file-name"
-              type="text"
-              placeholder="lorem ipsum"
-            />
-          </div>
-          <div>
-            <label class="field-label" for="file-size">Aprrox. Size</label>
-            <select class="input" id="file-size">
-              <option>Small</option>
-              <option selected>Medium</option>
-              <option>Large</option>
-            </select>
-          </div>
-        </div>
+				<div class="quick-fields">
+					<div>
+						<label class="field-label" for="field-name">File name</label>
+						<input
+							class="input"
+							id="file-name"
+							type="text"
+							placeholder="lorem ipsum"
+						/>
+					</div>
+					<div>
+						<label class="field-label" for="file-size">Aprrox. Size</label>
+						<select class="input" id="file-size">
+							<option>Small</option>
+							<option selected>Medium</option>
+							<option>Large</option>
+						</select>
+					</div>
+				</div>
 
-        <div class="quick-actions">
-          <button class="btn" type="button">Generate File</button>
-          <!-- fix later FIX LATER -->
-          <p class="hint">Preview only generating files isn't hooked up yet</p>
-        </div>
-      </section>
+				<div class="quick-actions">
+					<button class="btn" type="button">Generate File</button>
+					<!-- fix later FIX LATER -->
+					<p class="hint">Preview only generating files isn't hooked up yet</p>
+				</div>
+			</section>
 
-      <h3 class="section-title">View a larger variety of tools here</h3>
+			<h3 class="section-title">View a larger variety of tools here</h3>
 
-      <section class="card-grid" aria-label="File types">
-        <a class="card format-card" href="images.html">
-          <h3>Images</h3>
-          <p>placeholder image generator</p>
-        </a>
-        <a class="card format-card" href="docs.html">
-          <h3>Documents</h3>
-          <p>Filler text/Documents in various formats</p>
-        </a>
-        <a class="card format-card" href="audio.html">
-          <h3>Audio</h3>
-          <p>Placeholder tracks and tones</p>
-        </a>
-        <a class="card format-card" href="video.html">
-          <h3>Video</h3>
-          <p>Dummy clips for testing video players and uploads</p>
-        </a>
-      </section>
-    </main>
+			<section class="card-grid" aria-label="File types">
+				<a class="card format-card" href="images.html">
+					<h3>Images</h3>
+					<p>placeholder image generator</p>
+				</a>
+				<a class="card format-card" href="docs.html">
+					<h3>Documents</h3>
+					<p>Filler text/Documents in various formats</p>
+				</a>
+				<a class="card format-card" href="audio.html">
+					<h3>Audio</h3>
+					<p>Placeholder tracks and tones</p>
+				</a>
+				<a class="card format-card" href="video.html">
+					<h3>Video</h3>
+					<p>Dummy clips for testing video players and uploads</p>
+				</a>
+			</section>
+		</main>
 
-    <footer class="site-footer">
-      <p>Kaaos</p>
-    </footer>
-  </body>
+		<footer class="site-footer">
+			<p>Kaaos</p>
+		</footer>
+	</body>
 </html>
