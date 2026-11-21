@@ -11,7 +11,7 @@
 	--text: #1b1720;
 	--muted: #6b6475;
 	--accent: #f77fe9;
-	--accent-strong: #ee5cdc;
+	--accent-strong: #ee5cde;
 	--accent-text: #2a1328;
 
 	--topo-opacity: 0.22;
@@ -551,14 +551,12 @@ main > .card + .card {
 }
 
 .pill[data-preview="checker"] {
-	--preview-bg: conic-gradient(
-			#ff04de 25%,
-			#341294 0 50%,
-			#ff04de 0 75%,
-			#341294 0
-		)
-		0 0 / 20px 20px;
+    --preview-bg: conic-gradient(
+        var(--c1, #f77fe9) 25%, var(--c2, #2f7fe0) 0 50%,
+        var(--c1, #f77fe9) 0 75%, var(--c2, #2f7fe0) 0
+    ) 0 0 / 20px 20px;
 }
+
 .pill[data-preview="noise"] {
 	--preview-bg:
 		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"),

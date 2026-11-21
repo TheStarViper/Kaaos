@@ -1,4 +1,5 @@
 import {renderTopoPng} from "./topo.mjs";
+import { renderCheckerPng } from "./checker.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -99,6 +100,7 @@ const COLOR_LABELS = {
 	gradient: ["Start Color", "End Color"],
 	radial: ["Center Color", "Edge Color"],
 	plasma: ["Color 1", "Color 2"],
+    checker: ["Color 1", "Color 2"],
 	noise: ["Base Color"],
 	topo: ["Background Color", "Line Color"],
 };
@@ -227,7 +229,23 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		} else {
+		} else if (style==="checker"){
+            setStatus("Generating");
+            await nextPaint();
+            const png = await renderCheckerPng({
+				width,
+				height,
+				colorA: color1.value,
+				colorB: color2.value,
+                size: Math.max(1, Math.min(2000, Math.round(Number($("checker-size").value)) || 40)),
+			});
+            if (format === "png") {
+				bytes = png;
+			} else {
+				setStatus("Loading imagemagick");
+				bytes = convertPng(await loadMagick(), png, format);
+			}
+        } else {
 			setStatus("Loading imagemagick");
 			const lib = await loadMagick();
 			setStatus("Generating");
