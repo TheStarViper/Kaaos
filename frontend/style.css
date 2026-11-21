@@ -1013,7 +1013,7 @@ a.btn {
 	background: linear-gradient(to right, transparent, var(--picker-color, #f77fe9));
 }
 
-.picker-range::webkit-slider-thumb{
+.picker-range::-webkit-slider-thumb{
     -webkit-appearance: none;
     width:16px;
     height: 16px;
