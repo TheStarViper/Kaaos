@@ -947,3 +947,114 @@ a.btn {
     pointer-events: auto;
 }
 
+.custom-color-picker{
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.picker-sat-val{
+    position: relative;
+	width: 100%;
+	height: 150px;
+	border-radius: var(--radius-md);
+	background-color: hsl(300, 100%, 50%);
+	background-image: 
+		linear-gradient(to top, #000, transparent),
+		linear-gradient(to right, #fff, transparent);
+	cursor: crosshair;
+	overflow: hidden;
+}
+
+.sat-val-pointer{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.6);
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+}
+
+.picker-slider-wrapper{
+    position:relative;
+    height:12px;
+    border-radius: 6px;
+}
+
+.alpha-bg{
+    background-image: conic-gradient(#3a2a47 25%, transparent 25% 50%, #3a2a47 50% 75%, transparent 75%) !important;
+	background-size: 10px 10px !important;
+}
+
+.picker-range{
+    -webkit-appearance: none;
+    appearance:none;
+    width: 100%;
+    height:12px;
+    border-radius: 6px;
+	outline: none;
+	background: transparent;
+	cursor: pointer;
+	margin: 0;
+}
+
+.hue-range {
+	background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+}
+
+.alpha-range {
+	background: linear-gradient(to right, transparent, var(--picker-color, #f77fe9));
+}
+
+.picker-range::webkit-slider-thumb{
+    -webkit-appearance: none;
+    width:16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--surface);
+    box-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+
+.picker-inputs {
+	display: flex;
+	gap: 8px;
+}
+
+.input-col {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.input-hint{
+    font-size:0.7rem;
+    font-weight:700;
+    color: var(--muted);
+}
+
+.picker-swatches{
+    display: flex;
+    gap: 6px;
+}
+
+.swatch{
+    flex: 1;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.swatch:hover {
+	transform: scale(1.1);
+}
