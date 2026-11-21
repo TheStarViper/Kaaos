@@ -1,5 +1,5 @@
 import {renderTopoPng} from "./topo.mjs";
-import { renderCheckerPng } from "./checker.mjs";
+import {renderCheckerPng} from "./checker.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -100,7 +100,7 @@ const COLOR_LABELS = {
 	gradient: ["Start Color", "End Color"],
 	radial: ["Center Color", "Edge Color"],
 	plasma: ["Color 1", "Color 2"],
-    checker: ["Color 1", "Color 2"],
+	checker: ["Color 1", "Color 2"],
 	noise: ["Base Color"],
 	topo: ["Background Color", "Line Color"],
 };
@@ -108,15 +108,17 @@ const COLOR_LABELS = {
 //show only options a style needs
 function syncFields() {
 	const style = form.elements.style.value;
-    optionsEl.hidden = !style;
-    pickHint.hidden = !!style;
-    for (const el of fieldEls){
-        el.hidden = !style ||!el.dataset.styles.split(" ").includes(style);
-    }
-    const labels = COLOR_LABELS[style] || [];
-    colorLabels.forEach((el,i)=>{
-        if(labels[i]){el.textContent=labels[i];}
-    });
+	optionsEl.hidden = !style;
+	pickHint.hidden = !!style;
+	for (const el of fieldEls) {
+		el.hidden = !style || !el.dataset.styles.split(" ").includes(style);
+	}
+	const labels = COLOR_LABELS[style] || [];
+	colorLabels.forEach((el, i) => {
+		if (labels[i]) {
+			el.textContent = labels[i];
+		}
+	});
 }
 
 form.addEventListener("change", (e) => {
@@ -192,10 +194,10 @@ form.addEventListener("submit", async (events) => {
 
 	const format = $("img-format").value;
 	const style = form.elements.style.value;
-    if (!style){
-        setStatus("Pick a style to generate before clicking generate buddy",true);
-        return;
-    }
+	if (!style) {
+		setStatus("Pick a style to generate before clicking generate buddy", true);
+		return;
+	}
 	button.disabled = true;
 	setStatus("Loading Imagemagick");
 
@@ -229,23 +231,26 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		} else if (style==="checker"){
-            setStatus("Generating");
-            await nextPaint();
-            const png = await renderCheckerPng({
+		} else if (style === "checker") {
+			setStatus("Generating");
+			await nextPaint();
+			const png = await renderCheckerPng({
 				width,
 				height,
 				colorA: color1.value,
 				colorB: color2.value,
-                size: Math.max(1, Math.min(2000, Math.round(Number($("checker-size").value)) || 40)),
+				size: Math.max(
+					1,
+					Math.min(2000, Math.round(Number($("checker-size").value)) || 40),
+				),
 			});
-            if (format === "png") {
+			if (format === "png") {
 				bytes = png;
 			} else {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-        } else {
+		} else {
 			setStatus("Loading imagemagick");
 			const lib = await loadMagick();
 			setStatus("Generating");

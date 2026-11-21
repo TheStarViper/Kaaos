@@ -9,8 +9,6 @@ Kaaos is a program made to solve the problem of developers not having files to u
 idk add some more stuff to readme later this is fine for now also those sentences above are lies lmao i dont got jack impletemented except frontend
 
 todo:
-make custom color picker component cuz it look out of place
 make custom dropdown component cuz it look out of place
 rip the universal error handling from hanova and put the errors in the default html alerts
-header bar moves solid color preview notch pill thing when changing pages
 noise do: colored/grayscale/two color

@@ -1,90 +1,160 @@
-document.addEventListener("DOMContentLoaded",()=>{
-    const wrapper = document.getElementById("img-color1-wrapper");
-    const trigger = document.getElementById("img-color1-trigger");
-    const previewSwatch = document.getElementById("img-color1-preview");
-    const labelText = document.getElementById("img-color1-label");
+document.addEventListener("DOMContentLoaded", () => {
+	const wrapper = document.getElementById("img-color1-wrapper");
+	const trigger = document.getElementById("img-color1-trigger");
+	const previewSwatch = document.getElementById("img-color1-preview");
+	const labelText = document.getElementById("img-color1-label");
 
-    const satValBox = document.getElementById("sat-val-box");
-    const satValPointer = document.getElementById("sat-val-pointer");
-    const hueRange = document.getElementById("hue-range");
-    const alphaRange = document.getElementById("alpha-range");
-    const hexInput = document.getElementById("img-color1");
-    const alphaInput = document.getElementById("alpha-input");
-    const swatches = wrapper.querySelectorAll(".swatch");
+	const satValBox = document.getElementById("sat-val-box");
+	const satValPointer = document.getElementById("sat-val-pointer");
+	const hueRange = document.getElementById("hue-range");
+	const alphaRange = document.getElementById("alpha-range");
+	const hexInput = document.getElementById("img-color1");
+	const alphaInput = document.getElementById("alpha-input");
+	const swatches = wrapper.querySelectorAll(".swatch");
 
-    let state = {
-        h: 300,
-        s: 0.48,
-        v: 0.97,
-        a: 1
-    };
+	let state = {
+		h: 300,
+		s: 0.48,
+		v: 0.97,
+		a: 1,
+	};
 
-    function togglePopover(open){
-        const isOpen = open !==undefined ? open : !wrapper.classList.contains("is-open");
-        wrapper.classList.toggle("is-open",isOpen);
-        trigger.setAttribute("aria-expanded",isOpen);
-    }
+	function togglePopover(open) {
+		const isOpen =
+			open !== undefined ? open : !wrapper.classList.contains("is-open");
+		wrapper.classList.toggle("is-open", isOpen);
+		trigger.setAttribute("aria-expanded", isOpen);
+	}
 
-    trigger.addEventListener("click",(e)=>{
-        e.stopPropagation();
-        togglePopover();
-    });
+	trigger.addEventListener("click", (e) => {
+		e.stopPropagation();
+		togglePopover();
+	});
 
-    document.addEventListener("click",(e)=>{
-        if (!wrapper.contains(e.target)) {
-            togglePopover(false);
-        }
-    });
+	document.addEventListener("click", (e) => {
+		if (!wrapper.contains(e.target)) {
+			togglePopover(false);
+		}
+	});
 
-    wrapper.addEventListener("keydown",(e)=>{
-        if(e.key==="Escape"){
-            togglePopover(false);
-            trigger.focus();
-        }
-    });
+	wrapper.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
+			togglePopover(false);
+			trigger.focus();
+		}
+	});
 
-    function hsvToRgb(h, s, v) {
-        let f = (n, k = (n + h / 60) % 6) => v - v * s * Math.max(Math.min(k, 4 - k, 1), 0);
-        return [
-        Math.round(f(5) * 255),
-        Math.round(f(3) * 255),
-        Math.round(f(1) * 255)
-        ];
-    }
+	function hsvToRgb(h, s, v) {
+		let f = (n, k = (n + h / 60) % 6) =>
+			v - v * s * Math.max(Math.min(k, 4 - k, 1), 0);
+		return [
+			Math.round(f(5) * 255),
+			Math.round(f(3) * 255),
+			Math.round(f(1) * 255),
+		];
+	}
 
-    function rgbToHex(r, g, b, a) {
-        let toHex = (n) => n.toString(16).padStart(2, '0').toUpperCase();
-        let alphaHex = Math.round(a * 255) < 255 ? toHex(Math.round(a * 255)) : '';
-        return `#${toHex(r)}${toHex(g)}${toHex(b)}${alphaHex}`;
-    }
+	function rgbToHex(r, g, b, a) {
+		let toHex = (n) => n.toString(16).padStart(2, "0").toUpperCase();
+		let alphaHex = Math.round(a * 255) < 255 ? toHex(Math.round(a * 255)) : "";
+		return `#${toHex(r)}${toHex(g)}${toHex(b)}${alphaHex}`;
+	}
 
-    function updatePickerUI(){
-        satValBox.style.backgroundColor=`hsl(${state.h},100%,50%)`;
-        satValPointer.style.left=`${state.s*100}%`;
-        satValPointer.style.top = `${(1-state.v)*100}%`;
+	function updatePickerUI() {
+		satValBox.style.backgroundColor = `hsl(${state.h}, 100%, 50%)`;
+		satValPointer.style.left = `${state.s * 100}%`;
+		satValPointer.style.top = `${(1 - state.v) * 100}%`;
 
-        hueRange.value = state.h;
-        alphaRange.value = Math.round(state.a*100);
+		hueRange.value = state.h;
+		alphaRange.value = Math.round(state.a * 100);
 
-        const [r,g,b] = hsvToRgb(state.h,state.s,state.v);
-        const hex = rgbToHex(r,g,b,state.a);
+		const [r, g, b] = hsvToRgb(state.h, state.s, state.v);
+		const hex = rgbToHex(r, g, b, state.a);
 
-        hexInput.value = hex;
-        alphaInput.value = `${Math.round(state.a*100)}%`;
-        labelText.textContent = hex;
+		hexInput.value = hex;
+		alphaInput.value = `${Math.round(state.a * 100)}%`;
+		labelText.textContent = hex;
 
-        const displayCssColor = state.a<1?`rgba(${r}, ${g}, ${b}, ${state.a})` : hex;
-        previewSwatch.style.backgroundColor = displayCssColor;
-        document.documentElement.style.setProperty('--picker-color', `rgb(${r}, ${g}, ${b})`);
+		const displayCssColor =
+			state.a < 1 ? `rgba(${r}, ${g}, ${b}, ${state.a})` : hex;
+		previewSwatch.style.backgroundColor = displayCssColor;
 
-        hexInput.dispatchEvent(new Event("input", { bubbles: true }));
-    }
+		document.documentElement.style.setProperty(
+			"--picker-color",
+			`rgb(${r}, ${g}, ${b})`,
+		);
 
-    function handleSatValMove(e){
-        const rect = satValBox.getBoundingClientRect();
-        let x = Math.max(0,Math.min(rect.width,e.clientX-rect.left));
-        let y = Math.max(0,Math.min(rect.height,e.clientY-rect.top));
+		hexInput.dispatchEvent(new Event("input", {bubbles: true}));
+	}
 
-        
-    }
-})
+	function handleSatValMove(e) {
+		const rect = satValBox.getBoundingClientRect();
+		let x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+		let y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+
+		state.s = x / rect.width;
+		state.v = 1 - y / rect.height;
+		updatePickerUI();
+	}
+
+	let isDragging = false;
+
+	satValBox.addEventListener("mousedown", (e) => {
+		isDragging = true;
+		handleSatValMove(e);
+	});
+
+	window.addEventListener("mousemove", (e) => {
+		if (isDragging) handleSatValMove(e);
+	});
+
+	window.addEventListener("mouseup", () => {
+		isDragging = false;
+	});
+
+	hueRange.addEventListener("input", (e) => {
+		state.h = parseFloat(e.target.value);
+		updatePickerUI();
+	});
+
+	alphaRange.addEventListener("input", (e) => {
+		state.a = parseFloat(e.target.value) / 100;
+		updatePickerUI();
+	});
+
+	swatches.forEach((swatch) => {
+		swatch.addEventListener("click", () => {
+			const hex = swatch.dataset.color;
+			const r = parseInt(hex.slice(1, 3), 16);
+			const g = parseInt(hex.slice(3, 5), 16);
+			const b = parseInt(hex.slice(5, 7), 16);
+
+			let max = Math.max(r, g, b) / 255,
+				min = Math.min(r, g, b) / 255;
+			let d = max - min;
+			state.v = max;
+			state.s = max === 0 ? 0 : d / max;
+
+			updatePickerUI();
+		});
+	});
+
+	hexInput.addEventListener("change", (e) => {
+		let val = e.target.value.trim();
+		if (!val.startsWith("#")) val = "#" + val;
+		if (/^#([0-9A-F]{3}){1,2}$/i.test(val)) {
+			const r = parseInt(val.slice(1, 3), 16);
+			const g = parseInt(val.slice(3, 5), 16);
+			const b = parseInt(val.slice(5, 7), 16);
+
+			let max = Math.max(r, g, b) / 255,
+				min = Math.min(r, g, b) / 255;
+			let d = max - min;
+			state.v = max;
+			state.s = max === 0 ? 0 : d / max;
+			updatePickerUI();
+		}
+	});
+
+	updatePickerUI();
+});
