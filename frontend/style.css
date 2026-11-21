@@ -971,6 +971,7 @@ a.btn {
 	visibility: visible;
 	transform: translateY(0) scale(1);
 	pointer-events: auto;
+	z-index: 1000;
 }
 
 .custom-color-picker {

@@ -125,154 +125,21 @@
 						</div>
 
 						<div class="form-grid">
-							<!-- <div data-styles="solid gradient radial plasma checker noise topo">
-								<label
-									class="field-label"
-									id="img-color1-label"
-									for="img-color1"
-								>
-									Color
-								</label>
-								<input
-									class="input"
+							<div
+								data-styles="solid gradient radial plasma checker noise topo"
+							>
+								<label class="field-label" for="img-color1">Color</label>
+								<color-picker-popover
 									id="img-color1"
-									type="color"
-									value="#f77fe9"
-								/>
-							</div> -->
-							<div class="color-picker-popover-wrapper" id="img-color1-wrapper">
-								<button
-									type="button"
-									class="color-picker-trigger"
-									id="img-color1-trigger"
-									aria-haspopup="true"
-									aria-expanded="false"
-								>
-									<span
-										class="color-preview-swatch"
-										id="img-color1-preview"
-										style="background-color: #f77fe9"
-									></span>
-									<span class="color-hex-label" id="img-color1-label">
-										#F77FE9
-									</span>
-								</button>
-
-								<div
-									class="color-picker-popover"
-									id="img-color1-popover"
-									role="dialog"
-									aria-label="Choose color"
-								>
-									<div class="custom-color-picker">
-										<!-- Saturation / Value Canvas -->
-										<div class="picker-sat-val" id="sat-val-box">
-											<div class="sat-val-pointer" id="sat-val-pointer"></div>
-										</div>
-
-										<!-- Hue Slider -->
-										<div class="picker-slider-wrapper">
-											<input
-												type="range"
-												class="picker-range hue-range"
-												id="hue-range"
-												min="0"
-												max="360"
-												value="300"
-											/>
-										</div>
-
-										<!-- Alpha / Opacity Slider -->
-										<div class="picker-slider-wrapper alpha-bg">
-											<input
-												type="range"
-												class="picker-range alpha-range"
-												id="alpha-range"
-												min="0"
-												max="100"
-												value="100"
-											/>
-										</div>
-
-										<!-- Hex & Alpha Inputs -->
-										<div class="picker-inputs">
-											<div class="input-col">
-												<span class="input-hint">HEX</span>
-												<input
-													type="text"
-													class="input color-hex-input"
-													id="img-color1"
-													value="#F77FE9"
-													maxlength="9"
-												/>
-											</div>
-											<div class="input-col">
-												<span class="input-hint">ALPHA</span>
-												<input
-													type="text"
-													class="input color-alpha-input"
-													id="alpha-input"
-													value="100%"
-													readonly
-												/>
-											</div>
-										</div>
-
-										<!-- Quick Swatches -->
-										<div class="picker-swatches">
-											<button
-												type="button"
-												class="swatch"
-												style="background: #f77fe9"
-												data-color="#f77fe9"
-												aria-label="Pink"
-											></button>
-											<button
-												type="button"
-												class="swatch"
-												style="background: #341294"
-												data-color="#341294"
-												aria-label="Purple"
-											></button>
-											<button
-												type="button"
-												class="swatch"
-												style="background: #2f7fe0"
-												data-color="#2f7fe0"
-												aria-label="Blue"
-											></button>
-											<button
-												type="button"
-												class="swatch"
-												style="background: #00f5d4"
-												data-color="#00f5d4"
-												aria-label="Cyan"
-											></button>
-											<button
-												type="button"
-												class="swatch"
-												style="background: #ff007f"
-												data-color="#ff007f"
-												aria-label="Magenta"
-											></button>
-										</div>
-									</div>
-								</div>
+									value="#000000"
+								></color-picker-popover>
 							</div>
 							<div data-styles="gradient radial plasma checker topo">
-								<label
-									class="field-label"
-									id="img-color2-label"
-									for="img-color2"
-								>
-									Color 2
-								</label>
-								<input
-									class="input"
+								<label class="field-label" for="img-color2">Color</label>
+								<color-picker-popover
 									id="img-color2"
-									type="color"
-									value="#2f7fe0"
-								/>
+									value="#f77fe9"
+								></color-picker-popover>
 							</div>
 							<div data-styles="checker">
 								<label class="field-label" for="checker-size">
@@ -405,7 +272,7 @@
 		</main>
 
 		<script type="module" src="/backend/images/image-main.mjs"></script>
-		<script type="module" src="color-picker.js"></script>
+		<script type="module" src="color-picker-component.js" defer></script>
 
 		<footer>
 			<p>Kaaos</p>
