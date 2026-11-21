@@ -878,3 +878,72 @@ a.btn {
   }
 }
 
+
+/* color picker custom HYPERLINK */
+.color-picker-popover-relative{
+    position: relative;
+    display: inline-block;
+    width:100%;
+}
+
+.color-picker-trigger{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    font:inherit;
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.color-picker-trigger:hover{
+    border-color: var(--accent);
+}
+
+.color-picker-trigger:focus-visible{
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 2px;
+}
+
+.color-preview-swatch{
+    width: 24px;
+    height:24px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.color-hex-label{
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.color-picker-popover{
+    position:absolute;
+    top: calc(100%+8px);
+    left: 0;
+    z-index:100;
+    width: 300px;
+    opacity: 0;
+    visibility: hidden;
+	transform: translateY(-8px) scale(0.97);
+	pointer-events: none;
+	transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.color-picker-popover-wrapper.is-open .color-picker-popover{
+    opacity:1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
