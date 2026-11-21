@@ -1,4 +1,5 @@
 class ColorPickerPopover extends HTMLElement {
+    static openPicker = null;
 	constructor() {
 		super();
 		this.attachShadow({mode: "open"});
@@ -18,7 +19,7 @@ class ColorPickerPopover extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (oldValue !== newValue && name === "value") {
+		if (oldValue !== newValue && name === "value"&&this.satValBox) {
 			this.setColorFromHex(newValue);
 		}
 	}
@@ -105,6 +106,7 @@ class ColorPickerPopover extends HTMLElement {
 		this.swatches.forEach((swatch) => {
 			swatch.addEventListener("click", () => {
 				this.setColorFromHex(swatch.dataset.color);
+                this.togglePopover(false);
 			});
 		});
 
@@ -118,6 +120,7 @@ class ColorPickerPopover extends HTMLElement {
 	}
 
 	disconnectedCallback() {
+        if (ColorPickerPopover.openPicker===this){ColorPickerPopover.openPicker=null;}
 		document.removeEventListener("click", this.onOutsideClick);
 		window.removeEventListener("mousemove", this.onMouseMove);
 		window.removeEventListener("mouseup", this.onMouseUp);
@@ -126,6 +129,14 @@ class ColorPickerPopover extends HTMLElement {
 	togglePopover(open) {
 		const isOpen =
 			open !== undefined ? open : !this.wrapper.classList.contains("is-open");
+
+        if (isOpen){
+            const other = ColorPickerPopover.openPicker;
+            if  (other&&other!==this){other.togglePopover(false);}
+            ColorPickerPopover.openPicker = this;
+        } else {
+            ColorPickerPopover.openPicker = null;
+        }
 		this.wrapper.classList.toggle("is-open", isOpen);
 		this.trigger.setAttribute("aria-expanded", isOpen);
 	}
@@ -290,11 +301,11 @@ class ColorPickerPopover extends HTMLElement {
             </div>
 
             <div class="picker-swatches">
-              <button type="button" class="swatch" style="background: #f77fe9;" data-color="#f77fe9" aria-label="Pink"></button>
+              <button type="button" class="swatch" style="background: #341D36;" data-color="#341D36" aria-label="Pink"></button>
               <button type="button" class="swatch" style="background: #341294;" data-color="#341294" aria-label="Purple"></button>
               <button type="button" class="swatch" style="background: #2f7fe0;" data-color="#2f7fe0" aria-label="Blue"></button>
-              <button type="button" class="swatch" style="background: #00f5d4;" data-color="#00f5d4" aria-label="Cyan"></button>
-              <button type="button" class="swatch" style="background: #ff007f;" data-color="#ff007f" aria-label="Magenta"></button>
+              <button type="button" class="swatch" style="background: #b3ff01;" data-color="#b3ff01" aria-label="Cyan"></button>
+              <button type="button" class="swatch" style="background: #ff007f;" data-color="#db2681" aria-label="Magenta"></button>
             </div>
           </div>
         </div>

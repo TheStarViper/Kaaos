@@ -12,3 +12,4 @@ todo:
 make custom dropdown component cuz it look out of place
 rip the universal error handling from hanova and put the errors in the default html alerts
 noise do: colored/grayscale/two color
+combine gradient into one gradient and add four corner horizontal/vertical etc
