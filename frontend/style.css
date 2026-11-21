@@ -1,4 +1,7 @@
 /* ALRIGHT SINCE THIS IS ONE MEGA CSS FILE IMMA JUST HAVE SHI HERE YOU CAN CTRL + F TO FIND STUFF FASTER */
+/* just CTRL+F "HYPERLINK" to find all the bookmarks */
+
+
 /* data previews HYPERLINK - this is for pills for images to select style and change previews*/
 :root {
 	--bg: #ffffff;
@@ -806,6 +809,22 @@ a.btn {
 	transform: translate(-50%, 0);
 }
 
+
+/* hide when style is not chosen HYPERLINK*/
+#img-pick-hint {margin-top: 14px;}
+
+@keyframes reveal {
+    from {opacity: 0; transform: translateY(6px);}
+    to {opacity: 1; transform: none;}
+}
+
+#img-options:not([hidden]),
+[data-styles]:not([hidden]){
+    animation: reveal 0.2s ease both;
+}
+
+[hidden]{display:none !important;}
+
 @media (max-width: 560px) {
 	.brand {
 		padding: 10px 12px;
@@ -822,6 +841,7 @@ a.btn {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    #img-options,[data-styles]{animation:none !important;}
 	* {
 		transition: none !important;
 		scroll-behavior: auto !important;

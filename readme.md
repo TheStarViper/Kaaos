@@ -13,9 +13,6 @@ make custom color picker component cuz it look out of place
 make custom dropdown component cuz it look out of place
 rip the universal error handling from hanova and put the errors in the default html alerts
 header bar moves solid color preview notch pill thing when changing pages
-select style first then do customization after
 fix checker not being able to use colors
 get rid of color picker entirely if you cant use it
 noise do: colored/grayscale/two color
-add a smoothing slider to topo
-preview and download after generating

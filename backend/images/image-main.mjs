@@ -106,12 +106,21 @@ const COLOR_LABELS = {
 //show only options a style needs
 function syncFields() {
 	const style = form.elements.style.value;
+    optionsEl.hidden = !style;
+    pickHint.hidden = !!style;
+    for (const el of fieldEls){
+        el.hidden = !style ||!el.dataset.styles.split(" ").includes(style);
+    }
+    const labels = COLOR_LABELS[style] || [];
+    colorLabels.forEach((el,i)=>{
+        if(labels[i]){el.textContent=labels[i];}
+    });
 }
 
 form.addEventListener("change", (e) => {
-	if (e.target.name === "style") syncColorInputs();
+	if (e.target.name === "style") syncFields();
 });
-syncColorInputs();
+syncFields();
 
 const MAX_SIZE = 4000;
 function readSize(input) {
@@ -181,6 +190,10 @@ form.addEventListener("submit", async (events) => {
 
 	const format = $("img-format").value;
 	const style = form.elements.style.value;
+    if (!style){
+        setStatus("Pick a style to generate before clicking generate buddy",true);
+        return;
+    }
 	button.disabled = true;
 	setStatus("Loading Imagemagick");
 
