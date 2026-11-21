@@ -11,11 +11,11 @@ idk add some more stuff to readme later this is fine for now also those sentence
 todo:
 make custom color picker component cuz it look out of place
 make custom dropdown component cuz it look out of place
-when entering over max image size ugly html popup appears so fix that
 rip the universal error handling from hanova and put the errors in the default html alerts
-header bar moves when changing pages
+header bar moves solid color preview notch pill thing when changing pages
 select style first then do customization after
-fix checker not being abnle to use colors
+fix checker not being able to use colors
 get rid of color picker entirely if you cant use it
 noise do: colored/grayscale/two color
 add a smoothing slider to topo
+preview and download after generating

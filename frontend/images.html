@@ -164,11 +164,17 @@
 
           <div class="form-grid" id="topo-options" hidden>
             <div>
-                <label class="field-label" for="topo-levels">Contour lines:<output id="topo-levels-out">18</output></label>
+                <div class="label-row">
+                    <label class="field-label" for="topo-levels">Contour lines: <output id="topo-levels-out">18</output></label>
+                    <button class="help" type="button" aria-label="What are contour lines?" aria-describedby="help-levels">?<span class="help-tip" role="tooltip" id="help-levels">How many height levels are drawn as lines. More lines make a denser, more detailed map; fewer make a simpler, cleaner one. Every fifth line is drawn thicker.</span></button>
+                </div>
                 <input class="range" id="topo-levels" type="range" min="6" max="40" value="18">
             </div>
             <div>
-                <label class="field-label" for="topo-scale">Hills across: <output id="topo-scale-out">3</output></label>
+                <div class="label-row">
+                    <label class="field-label" for="topo-scale">Hills across: <output id="topo-scale-out">3</output></label>
+                    <button class="help" type="button" aria-label="What does hills across mean?" aria-describedby="help-scale">?<span class="help-tip" role="tooltip" id="help-scale">How many hills fit across the width of the image. Low numbers give a few big hills and valleys and high numbers give lots of small tightly packed ones.</span></button>
+                </div>
                 <input class="range" id="topo-scale" type="range" min="1" max="10" value="3">
             </div>
             <div>
