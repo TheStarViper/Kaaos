@@ -123,10 +123,22 @@
 								</select>
 							</div>
 						</div>
-
+						<div class="form-grid" data-styles="noise">
+							<div>
+								<label class="field-label" for="noise-type">Noise Type</label>
+								<select class="input" id="noise-type">
+									<option value="white">White noise (greyscale static)</option>
+									<option value="color">Color noise (RGB static)</option>
+									<option value="tinted">Tinted (one color)</option>
+									<option value="gaussian">Gaussian (soft grey)</option>
+									<option value="saltpepper">Salt &amp; pepper</option>
+									<option value="clouds">Clouds (smooth)</option>
+								</select>
+							</div>
+						</div>
 						<div class="form-grid">
 							<div
-								data-styles="solid gradient radial plasma checker noise topo"
+								data-styles="solid gradient radial plasma checker noise:tinted noise:clouds  topo"
 							>
 								<label class="field-label" for="img-color1">Color</label>
 								<color-picker-popover
@@ -134,7 +146,7 @@
 									value="#000000"
 								></color-picker-popover>
 							</div>
-							<div data-styles="gradient radial plasma checker topo">
+							<div data-styles="gradient radial plasma noise:clouds checker topo">
 								<label class="field-label" for="img-color2">Color</label>
 								<color-picker-popover
 									id="img-color2"

@@ -85,7 +85,7 @@ export async function renderNoisePng({width,height,kind,colorA,colorB}){
                 const v = clamp(128+gaussian()*40);
                 px[i] = pack(v, v, v);
             }
-        } else if (king ==="saltpepper"){
+        } else if (kind ==="saltpepper"){
             const grey = pack(128,128,128);
             const black = pack(0,0,0);
             const white = pack(255,255,255);
