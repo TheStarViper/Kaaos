@@ -500,21 +500,22 @@ main > .card + .card {
 }
 
 .pill[data-preview="solid"] {
-	--preview-bg: var(--c1, #f77fe9);
+	--preview-bg: url("../assets/previews/images/solid.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .pill[data-preview="gradient"] {
-	--preview-bg: linear-gradient(
-		to bottom,
-		var(--c1, #f77fe9),
-		var(--c2, #341294)
-	);
+	--preview-bg: url("../assets/previews/images/vert-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .pill[data-preview="radial"] {
-	--preview-bg: radial-gradient(
-		circle at center,
-		var(--c1, #f77fe9),
-		var(--c2, #341294)
-	);
+	--preview-bg: url("../assets/previews/images/rad-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .pill[data-preview="plasma"]::after {
@@ -525,13 +526,10 @@ main > .card + .card {
 }
 
 .pill[data-preview="checker"] {
-	--preview-bg: conic-gradient(
-			var(--c1, #f77fe9) 25%,
-			var(--c2, #2f7fe0) 0 50%,
-			var(--c1, #f77fe9) 0 75%,
-			var(--c2, #2f7fe0) 0
-		)
-		0 0 / 20px 20px;
+	--preview-bg: url("../assets/previews/images/checker.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .pill[data-preview="noise"] {
