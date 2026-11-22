@@ -13,6 +13,6 @@ const pages = Object.fromEntries(
 
 export default defineConfig({
 	base: "./",
-	build: {rollupOptions: {input: pages}},
+	build: {rollupOptions: {input: './frontend/index.html'}},
 	optimizeDeps: {exlude: ["@imagemagick/magick-wasm"]},
 });
