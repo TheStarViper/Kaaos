@@ -44,14 +44,13 @@
 	navigation: auto;
 }
 
-.site-header{
+.site-header {
 	view-transition-name: site-header;
 }
 
-.tabs{
+.tabs {
 	view-transition-name: nav-tabs;
 }
-
 
 *,
 *::before,
@@ -966,7 +965,7 @@ a.btn {
 .picker-range {
 	-webkit-appearance: none;
 	appearance: none;
-	display:block;
+	display: block;
 	width: 100%;
 	height: 12px;
 	border-radius: 6px;

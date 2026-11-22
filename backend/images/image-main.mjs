@@ -1,6 +1,6 @@
 import {renderTopoPng} from "./topo.mjs";
 import {renderCheckerPng} from "./checker.mjs";
-import { renderNoisePng } from "./noise.mjs";
+import {renderNoisePng} from "./noise.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -104,7 +104,7 @@ const COLOR_LABELS = {
 	plasma: ["Color 1", "Color 2"],
 	checker: ["Color 1", "Color 2"],
 	"noise:tinted": ["Base color"],
-  	"noise:clouds": ["Dark color", "Light color"],
+	"noise:clouds": ["Dark color", "Light color"],
 	topo: ["Background Color", "Line Color"],
 };
 
@@ -117,7 +117,7 @@ function syncFields() {
 	pickHint.hidden = !!style;
 	for (const el of fieldEls) {
 		const wanted = el.dataset.styles.split(" ");
-		el.hidden = !style || !(wanted.includes(style)||wanted.includes(key));
+		el.hidden = !style || !(wanted.includes(style) || wanted.includes(key));
 	}
 	const labels = COLOR_LABELS[key] || COLOR_LABELS[style] || [];
 	colorLabels.forEach((el, i) => {
@@ -128,7 +128,7 @@ function syncFields() {
 }
 
 form.addEventListener("change", (e) => {
-	if (e.target.name === "style"||e.target.id==="noise-type") syncFields();
+	if (e.target.name === "style" || e.target.id === "noise-type") syncFields();
 });
 syncFields();
 
@@ -237,7 +237,7 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		} else if (style==="noise"){
+		} else if (style === "noise") {
 			setStatus("Generating");
 			await nextPaint();
 			const png = await renderNoisePng({
@@ -253,7 +253,7 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		}else if (style === "checker") {
+		} else if (style === "checker") {
 			setStatus("Generating");
 			await nextPaint();
 			const png = await renderCheckerPng({

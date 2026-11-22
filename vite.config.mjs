@@ -12,7 +12,7 @@ const pages = Object.fromEntries(
 );
 
 export default defineConfig({
-	base: "./",
-	build: {rollupOptions: {input: './frontend/index.html'}},
+	base: "./Kaaos/",
+	build: {rollupOptions: {input: "./frontend/index.html"}},
 	optimizeDeps: {exlude: ["@imagemagick/magick-wasm"]},
 });

@@ -1,5 +1,5 @@
 class ColorPickerPopover extends HTMLElement {
-    static openPicker = null;
+	static openPicker = null;
 	constructor() {
 		super();
 		this.attachShadow({mode: "open"});
@@ -19,7 +19,7 @@ class ColorPickerPopover extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (oldValue !== newValue && name === "value"&&this.satValBox) {
+		if (oldValue !== newValue && name === "value" && this.satValBox) {
 			this.setColorFromHex(newValue);
 		}
 	}
@@ -106,7 +106,7 @@ class ColorPickerPopover extends HTMLElement {
 		this.swatches.forEach((swatch) => {
 			swatch.addEventListener("click", () => {
 				this.setColorFromHex(swatch.dataset.color);
-                this.togglePopover(false);
+				this.togglePopover(false);
 			});
 		});
 
@@ -120,7 +120,9 @@ class ColorPickerPopover extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-        if (ColorPickerPopover.openPicker===this){ColorPickerPopover.openPicker=null;}
+		if (ColorPickerPopover.openPicker === this) {
+			ColorPickerPopover.openPicker = null;
+		}
 		document.removeEventListener("click", this.onOutsideClick);
 		window.removeEventListener("mousemove", this.onMouseMove);
 		window.removeEventListener("mouseup", this.onMouseUp);
@@ -130,13 +132,15 @@ class ColorPickerPopover extends HTMLElement {
 		const isOpen =
 			open !== undefined ? open : !this.wrapper.classList.contains("is-open");
 
-        if (isOpen){
-            const other = ColorPickerPopover.openPicker;
-            if  (other&&other!==this){other.togglePopover(false);}
-            ColorPickerPopover.openPicker = this;
-        } else {
-            ColorPickerPopover.openPicker = null;
-        }
+		if (isOpen) {
+			const other = ColorPickerPopover.openPicker;
+			if (other && other !== this) {
+				other.togglePopover(false);
+			}
+			ColorPickerPopover.openPicker = this;
+		} else {
+			ColorPickerPopover.openPicker = null;
+		}
 		this.wrapper.classList.toggle("is-open", isOpen);
 		this.trigger.setAttribute("aria-expanded", isOpen);
 	}
