@@ -65,7 +65,7 @@ function makeNoise(rand) {
 	};
 }
 
-function buildField(cols, rows, scale, seed, smoothing) {
+export function buildField(cols, rows, scale, seed, smoothing) {
 	const rand = mulberry32(seed);
 	const noise = makeNoise(rand);
 	const octaves = [1, 2, 4].map((freq, i) => ({

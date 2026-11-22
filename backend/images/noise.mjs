@@ -48,5 +48,58 @@ function drawClouds(ctx,width,height,colorA,colorB){
 }
 
 export async function renderNoisePng({width,height,kind,colorA,colorB}){
-    
+    const canvas= document.createElement("canvas");
+    canvas.width = width;
+    canvas.height= height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+		throw new Error(
+			"Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)",
+		);
+	}
+
+    if (kind==="clouds"){
+        drawClouds(ctx,width,height,colorA,colorB);
+    } else {
+        const image = ctx.createImageData(width,height);
+        const px = new Uint32Array(image.data.buffer);
+        const n = px.length;
+
+        if (kind==="white"){
+            for (let i = 0;i<n;i++){
+                const v = (Math.random()*256) | 0;
+                px[i] = pack(v,v,v);
+            }
+        } else if (kind==="color"){
+            for (let i = 0; i < n; i++) {
+                px[i] = pack((Math.random() * 256) | 0, (Math.random() * 256) | 0, (Math.random() * 256) | 0);
+            }
+        } else if (kind==="tinted"){
+            const [r,g,b] = hexToRgb(colorA);
+            for (let i = 0;i<n;i++){
+                const d = (Math.random()-.5)*180;
+                px[i] = pack(clamp(r+d),clamp(g+d),clamp(b+d));
+            }
+        } else if (kind==="gaussian"){
+            for (let i = 0;i<n;i++){
+                const v = clamp(128+gaussian()*40);
+                px[i] = pack(v, v, v);
+            }
+        } else if (king ==="saltpepper"){
+            const grey = pack(128,128,128);
+            const black = pack(0,0,0);
+            const white = pack(255,255,255);
+            for (let i = 0;i<n;i++){
+                const r = Math.random();
+                px[i] = r<0.06?black:r<0.12?white:grey;
+            }
+        } else {
+            throw new Error(`Unknown type: ${kind}`);
+        }
+        ctx.putImageData(image,0,0);
+    }
+
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (!blob) throw new Error("Couldn't create the image (it may be too large for this browser).");
+    return new Uint8Array(await blob.arrayBuffer());
 }
