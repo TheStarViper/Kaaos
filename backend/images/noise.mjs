@@ -1,5 +1,3 @@
-import {buildField} from "./topo.mjs";
-
 function hexToRgb(hex) {
 	const h = String(hex).replace("#", "");
 	return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) || 0);
@@ -13,44 +11,65 @@ function gaussian() {
 	return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * Math.random());
 }
 
-function drawClouds(ctx, width, height, colorA, colorB) {
-	const cell = Math.max(2, Math.ceil(Math.max(width, height) / 600));
-	const cols = Math.ceil(width / cell);
-	const rows = Math.ceil(height / cell);
-	const stride = cols + 1;
-	const field = buildField(
-		cols,
-		rows,
-		4,
-		Math.floor(Math.random() * 1_000_000),
-		0,
-	);
+function cloudField(cols,rows){
+    const field = new Float32Array(cols*rows);
+    const long =Math.max(cols,rows);
+    let amp = 1;
 
-	const small = document.createElement("canvas");
-	small.width = cols;
-	small.height = rows;
-	const sctx = small.getContext("2d");
-	const img = sctx.createImageData(cols, rows);
-	const px = new Uint8Array(img.data.buffer);
-	const [r1, g1, b1] = hexToRgb(colorA);
-	const [r2, g2, b2] = hexToRgb(colorB);
+    for (let octave = 0; octave < 4; octave++){
+        const freq = 4*2**octave;
+        const gw = Math.ceil((cols/long)*freq)+2;
+        const gh = Math.ceil((rows/long)*freq)+2;
 
-	for (let j = 0; j < rows; j++) {
-		for (let i = 0; i < cols; i++) {
-			const t = field[j * stride + i];
-			px[j * cols * i] = pack(
-				clamp(r1 + (r2 - r1) * t),
-				clamp(g1 + (g2 - g1) * t),
-				clamp(b1 + (b2 - b1) * t),
-			);
-		}
-	}
+        const grid = new Flaot32Array(gw*gh);
+        for (let i = 0;i<grid.length;i++){
+            grid[i] = Math.random();
+        }
 
-	sctx.putImageData(img, 0, 0);
+        for (let y = 0; y<rows;y++){
+            const gy=(y/long)*freq;
+            const y0 = gy|0;
+            const fy = gy-y0;
+            const sy = fy *fy * (3-2*fy);
+            for (let x = 0; x < cols; x++) {
+                const gx = (x / long) * freq;
+                const x0 = gx | 0;
+                const fx = gx - x0;
+                const sx = fx * fx * (3 - 2 * fx);
+                const a = grid[y0 * gw + x0];
+                const b = grid[y0 * gw + x0 + 1];
+                const c = grid[(y0 + 1) * gw + x0];
+                const d = grid[(y0 + 1) * gw + x0 + 1];
+                const top = a + (b - a) * sx;
+                const bottom = c + (d - c) * sx;
+                field[y * cols + x] += amp * (top + (bottom - top) * sy);
+            }
+        }
+        amp*=0.5;
+    }
+    let min = Infinity;
+    let max = -Infinity;
 
-	ctx.imageSmoothingEnabled = true;
-	ctx.imageSmoothingQuality = "high";
-	ctx.drawImage(small, 0, 0, cols * cell, rows * cell);
+    for (let i = 0; i<field.length;i++){
+        if (field[i]<min){
+            min = field[i];
+        }
+
+        if (field[i]>max){
+            max=field[i];
+        }
+    }
+
+    const span = max-min||1;
+    for (let i = 0;i<field.length;i++){
+        field[i]=(field[i]-min)/span;
+    }
+
+    return field;
+}
+
+function drawClouds(ctx,width,height,colorA,colorB){
+    c
 }
 
 export async function renderNoisePng({width, height, kind, colorA, colorB}) {
