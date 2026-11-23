@@ -14,27 +14,27 @@ export function mulberry32(seed) {
 	};
 }
 
-export async function renderToPng(width,height, drawCallback){
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
+export async function renderToPng(width, height, drawCallback) {
+	const canvas = document.createElement("canvas");
+	canvas.width = width;
+	canvas.height = height;
 
-    const ctx = canvas.getContext("2d");
+	const ctx = canvas.getContext("2d");
 	if (!ctx) {
 		throw new Error(
 			"Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)",
 		);
 	}
 
-    drawCallback(ctx);
-    const blob = await new Promise((resolve) =>
+	drawCallback(ctx);
+	const blob = await new Promise((resolve) =>
 		canvas.toBlob(resolve, "image/png"),
 	);
 
-    if (!blob) {
+	if (!blob) {
 		throw new Error(
 			"Couldnt create the image (might be too big for this browser)",
 		);
 	}
-    return new Uint8Array(await blob.arrayBuffer());
+	return new Uint8Array(await blob.arrayBuffer());
 }

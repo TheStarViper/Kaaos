@@ -1,4 +1,4 @@
-import { mulberry32 } from "../utils.mjs";
+import {mulberry32, renderToPng} from "../utils.mjs";
 
 function makeNoise(rand) {
 	const p = Array.from({length: 256}, (_, i) => i);
@@ -172,50 +172,30 @@ export async function renderTopoPng({
 	const rows = Math.max(1, Math.ceil(height / cell));
 
 	const field = buildField(cols, rows, scale, seed, smoothing);
-	const canvas = document.createElement("canvas");
+	return renderToPng(width, height, (ctx) => {
+		ctx.fillStyle = background;
+		ctx.fillRect(0, 0, width, height);
 
-	canvas.width = width;
-	canvas.height = height;
+		ctx.strokeStyle = lineColor;
+		ctx.lineCap = "round";
+		ctx.lineJoin = "round";
 
-	const ctx = canvas.getContext("2d");
-	if (!ctx) {
-		throw new Error(
-			"Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)",
-		);
-	}
+		const baseWidth = Math.max(1, Math.min(width, height) / 450);
 
-	ctx.fillStyle = background;
-	ctx.fillRect(0, 0, width, height);
+		for (let k = 0; k < levels; k++) {
+			const level = 0.06 + (0.88 * (k + 0.5)) / levels;
+			const major = k % 5 === 0;
 
-	ctx.strokeStyle = lineColor;
-	ctx.lineCap = "round";
-	ctx.lineJoin = "round";
+			ctx.lineWidth = major ? baseWidth * 2 : baseWidth;
+			ctx.globalAlpha = major ? 1 : 0.7;
+			ctx.beginPath();
 
-	const baseWidth = Math.max(1, Math.min(width, height) / 450);
-
-	for (let k = 0; k < levels; k++) {
-		const level = 0.06 + (0.88 * (k + 0.5)) / levels;
-		const major = k % 5 === 0;
-
-		ctx.lineWidth = major ? baseWidth * 2 : baseWidth;
-		ctx.globalAlpha = major ? 1 : 0.7;
-		ctx.beginPath();
-
-		contourSegments(field, cols, rows, level, (x1, y1, x2, y2) => {
-			ctx.moveTo(x1 * cell, y1 * cell);
-			ctx.lineTo(x2 * cell, y2 * cell);
-		});
-		ctx.stroke();
-	}
-	ctx.globalAlpha = 1;
-
-	const blob = await new Promise((resolve) =>
-		canvas.toBlob(resolve, "image/png"),
-	);
-	if (!blob) {
-		throw new Error(
-			"Couldnt create the image (might be too big for this browser)",
-		);
-	}
-	return new Uint8Array(await blob.arrayBuffer());
+			contourSegments(field, cols, rows, level, (x1, y1, x2, y2) => {
+				ctx.moveTo(x1 * cell, y1 * cell);
+				ctx.lineTo(x2 * cell, y2 * cell);
+			});
+			ctx.stroke();
+		}
+		ctx.globalAlpha = 1;
+	});
 }

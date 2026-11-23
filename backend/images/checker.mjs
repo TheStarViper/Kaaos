@@ -1,3 +1,5 @@
+import { renderToPng } from "../utils.mjs";
+
 export async function renderCheckerPng({
 	width,
 	height,
@@ -15,26 +17,8 @@ export async function renderCheckerPng({
 	t.fillRect(size, 0, size, size);
 	t.fillRect(0, size, size, size);
 
-	const canvas = document.createElement("canvas");
-	canvas.width = width;
-	canvas.height = height;
-
-	const ctx = canvas.getContext("2d");
-	if (!ctx) {
-		throw new Error(
-			"Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)",
-		);
-	}
-	ctx.fillStyle = ctx.createPattern(tile, "repeat");
-	ctx.fillRect(0, 0, width, height);
-
-	const blob = await new Promise((resolve) =>
-		canvas.toBlob(resolve, "image/png"),
-	);
-	if (!blob) {
-		throw new Error(
-			"Couldnt create the image (might be too big for this browser)",
-		);
-	}
-	return new Uint8Array(await blob.arrayBuffer());
+	return renderToPng(width,height,(ctx)=>{
+		ctx.fillStyle= ctx.createPattern(tile,"repeat");
+		ctx.fillRect(0,0,width,height);
+	});
 }
