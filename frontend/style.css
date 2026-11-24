@@ -1041,3 +1041,9 @@ a.btn {
 .swatch:hover {
 	transform: scale(1.1);
 }
+
+.style-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
