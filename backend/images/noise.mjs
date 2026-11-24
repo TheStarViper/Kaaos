@@ -1,7 +1,6 @@
-import {hexToRgb} from "../utils.mjs";
+import {hexToRgb,pack} from "../utils.mjs";
 
 const clamp = (v) => (v < 0 ? 0 : v > 255 ? 255 : v | 0);
-const pack = (r, g, b) => (255 << 24) | (b << 16) | (g << 8) | r;
 
 function gaussian() {
 	const u = 1 - Math.random();

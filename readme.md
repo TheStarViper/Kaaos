@@ -22,3 +22,16 @@ glitch / scanlines / chromatic abberation (input an image)
 like 10 fractal variants
 wax swirls
 Kaleidoscope x10
+
+plasma fractal / plasma fractal blurred
+bi-linear gradient
+
+ docs:
+
+ audio:
+  idk ab audio synths
+
+ video:
+  have multiple visualizer types that take in a file to upload then a bunch of config
+
+  

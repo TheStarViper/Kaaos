@@ -3,6 +3,8 @@ export function hexToRgb(hex) {
 	return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) || 0);
 }
 
+export const pack = (r, g, b) => (255 << 24) | (b << 16) | (g << 8) | r;
+
 export function mulberry32(seed) {
 	let a = seed >>> 0;
 	return () => {

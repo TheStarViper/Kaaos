@@ -27,15 +27,11 @@ const topoSmooth = $("topo-smooth");
 
 for (const range of [topoLevels, topoScale, topoSmooth]) {
 	const out = $(`${range.id}-out`);
-	const update = () => {
+	range.addEventListener("input", () => {
 		out.textContent = range.value;
-		range.style.setProperty(
-			"--p",
-			(range.value - range.min) / (range.max - range.min),
-		);
-	};
-	range.addEventListener("input", update);
-	update();
+		range.style.setProperty("--p", (range.value - range.min) / (range.max - range.min));
+	});
+	range.dispatchEvent(new Event("input"));
 }
 
 function syncPreviewColors() {
