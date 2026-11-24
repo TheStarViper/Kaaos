@@ -28,5 +28,54 @@ export async function renderBasicPng({width,height,kind,colors}){
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d");
-    
+    if (!ctx) {
+		throw new Error(
+			"Canvas isnt available in this browser (ur either on mobile or on an OLD ASF BROWSER UNC)",
+		);
+	}
+
+    if (kind==="fourcorner"){
+        fourCorner(ctx,width,height,colors);
+    } else {
+        let fill;
+        if (kind ==="solid"){
+            fill = c1;
+        } else if (kind==="hgradient"){
+            fill = ctx.createLinearGradient(0,0,width,0);
+            fill.addColorStop(0,c1);
+            fill.addColorStop(1,c2);
+        } else if (kind==="vgradient"){
+            fill = ctx.createLinearGradient(0,0,0,height);
+            fill.addColorStop(0,c1);
+            fill.addColorStop(1,c2);
+        } else if (kind==="radial"){
+            const r = Math.hypot(width,height)/2;
+            fill = ctx.createRadialGradient(width/2,height/2,0,width/2,height/2,r);
+            fill.addColorStop(0,c1);
+            fill.addColorStop(1,c2);
+        } else if (kind==="conic"){
+            if (!ctx.createConicGradient){
+                throw new Error("Conic gradients need a more modern browser");
+            }
+
+            fill = ctx.createConicGradient(-Math.PI/2,width/2,height/2);
+            fill.addColorStop(0,c1);
+            fill.addColorStop(0.5,c2);
+            fill.addColorStop(1,c1);
+        } else {
+            throw new Error(`Unknown fill: ${kind}`);
+        }
+        ctx.fillStyle = fill;
+        ctx.fillRect(0,0,width,height);
+    }
+
+    const blob = await new Promise((resolve) =>
+		canvas.toBlob(resolve, "image/png"),
+	);
+	if (!blob) {
+		throw new Error(
+			"Couldnt create the image (might be too big for this browser)",
+		);
+	}
+	return new Uint8Array(await blob.arrayBuffer());
 }
