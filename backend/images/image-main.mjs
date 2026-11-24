@@ -1,7 +1,7 @@
 import {renderTopoPng} from "./topo.mjs";
 import {renderCheckerPng} from "./checker.mjs";
 import {renderNoisePng} from "./noise.mjs";
-import { renderBasicPng } from "./gradients.mjs";
+import {renderBasicPng} from "./gradients.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -280,8 +280,11 @@ form.addEventListener("submit", async (events) => {
 		} else if (BASIC_STYLES.includes(style)){
 			setStatus("Generating");
 			await nextPaint();
-			const png = renderBasicPng({
-				width,height,kind:style,colors: [color1.value,color2.value,color3.value,color4.value],
+			const png = await renderBasicPng({
+				width,
+				height,
+				kind: style,
+				colors: [color1.value,color2.value,color3.value,color4.value],
 			});
 			if (format === "png") {
 				bytes = png;

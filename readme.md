@@ -15,7 +15,7 @@ noise do: colored/grayscale/two color
 combine gradient into one gradient and add four corner horizontal/vertical etc
 for conic,radial,and the linear gradients add a bar editor for the gradient and add more colors etc
 conic gradient
-polka dots
+polka dots: size / size variance / frequency
 triangles,checker,hexagon,other tiling
 voronoi
 glitch / scanlines / chromatic abberation (input an image)
@@ -34,4 +34,3 @@ bi-linear gradient
  video:
   have multiple visualizer types that take in a file to upload then a bunch of config
 
-  

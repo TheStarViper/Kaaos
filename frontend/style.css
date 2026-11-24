@@ -504,12 +504,14 @@ main > .card + .card {
 	background-position: center;
 	background-repeat: no-repeat;
 }
-.pill[data-preview="gradient"] {
+.pill[data-preview="vgradient"] {
 	--preview-bg: url("../assets/previews/images/vert-gradient.png");
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
+
+
 .pill[data-preview="radial"] {
 	--preview-bg: url("../assets/previews/images/rad-gradient.png");
 	background-size: 100% 100%;

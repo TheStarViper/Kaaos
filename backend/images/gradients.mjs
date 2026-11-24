@@ -10,7 +10,7 @@ function fourCorner(ctx,width,height,[tl,tr,bl,br]){
     for (let y = 0;y<height;y++){
         const v = y/h;
         for (let x = 0; x<width;x++){
-            const u = w/w;
+            const u = x/w;
             const mix = (k)=>{
                 const top = a[k]+(b[k]-a[k])*u;
                 const bottom = c[k] +(d[k]-c[k])*u;
