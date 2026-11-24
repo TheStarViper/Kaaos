@@ -3,6 +3,16 @@ export function hexToRgb(hex) {
 	return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) || 0);
 }
 
+export const sRgbToLinear = (c) =>{
+	const v = c/255;
+	return v <=0.04045 ? v/12.92:Math.pow((v+0.055)/1.055,2.4);
+}
+
+export const linearToSRgb = (v) =>{
+	const c = v <=0.0031308 ? v * 12.92 : 1.055 * Math.pow(v,1/2.4)-0.055;
+	return Math.min(255,Math.max(0,Math.round(c*255)));
+}
+
 export const pack = (r, g, b) => (255 << 24) | (b << 16) | (g << 8) | r;
 
 export function mulberry32(seed) {
