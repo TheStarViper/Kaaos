@@ -1,6 +1,7 @@
 import {renderTopoPng} from "./topo.mjs";
 import {renderCheckerPng} from "./checker.mjs";
 import {renderNoisePng} from "./noise.mjs";
+import { renderBasicPng } from "./gradients.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -13,11 +14,12 @@ const meta = $("img-meta");
 const download = $("img-download");
 const color1 = $("img-color1");
 const color2 = $("img-color2");
+const color3 = $("img-color3");
+const color4 = $("img-color4");
 const optionsEl = $("img-options");
 const pickHint = $("img-pick-hint");
 const fieldEls = form.querySelectorAll("[data-styles]");
-const colorLabels = [$("img-color1-label"), $("img-color2-label")];
-const noiseType = $("noise-type");
+const colorLabels = [1,2,3,4].map((n)=>$(`img-color${n}-label`));
 
 //topo vals
 const topoLevels = $("topo-levels");
@@ -36,12 +38,15 @@ for (const range of [topoLevels, topoScale, topoSmooth]) {
 
 function syncPreviewColors() {
 	const root = document.documentElement.style;
-	root.setProperty("--c1", color1.value);
-	root.setProperty("--c2", color2.value);
+	[color1,color2,color3,color4].forEach((picker,i)=>{
+		root.setProperty(`--c${i+1}`,picker.value);
+	});
 }
 
-color1.addEventListener("input", syncPreviewColors);
-color2.addEventListener("input", syncPreviewColors);
+for (const picker of [color1,color2,color3,color4]){
+	picker.addEventListener("input",syncPreviewColors);
+	picker.addEventListener("change",syncPreviewColors);
+}
 syncPreviewColors();
 
 const MIME = {
@@ -95,40 +100,44 @@ function setStatus(text, isError = false) {
 
 const COLOR_LABELS = {
 	solid: ["Color"],
-	gradient: ["Start Color", "End Color"],
+	hgradient: ["Left Color", "Right Color"],
+	vgradient: ["Top Color", "Bottom Color"],
 	radial: ["Center Color", "Edge Color"],
+	conic: ["Color 1","Color 2"],
+	fourcorner: ["Top left", "Top right", "Bottom left", "Bottom right"],
 	plasma: ["Color 1", "Color 2"],
 	checker: ["Color 1", "Color 2"],
-	"noise:tinted": ["Base color"],
-	"noise:clouds": ["Dark color", "Light color"],
+	tinted: ["Base color"],
+	clouds: ["Dark color", "Light color"],
 	topo: ["Background Color", "Line Color"],
 };
 
 //show only options a style needs
 function syncFields() {
 	const style = form.elements.style.value;
-	const key = style === "noise" ? `noise:${noiseType.value}` : style;
 
 	optionsEl.hidden = !style;
 	pickHint.hidden = !!style;
 	for (const el of fieldEls) {
-		const wanted = el.dataset.styles.split(" ");
-		el.hidden = !style || !(wanted.includes(style) || wanted.includes(key));
+		el.hidden = !style || !el.dataset.styles.split(" ").includes(style);
 	}
-	const labels = COLOR_LABELS[key] || COLOR_LABELS[style] || [];
+	const labels = COLOR_LABELS[style] || [];
 	colorLabels.forEach((el, i) => {
-		if (labels[i]) {
+		if (el&&labels[i]) {
 			el.textContent = labels[i];
 		}
 	});
 }
 
 form.addEventListener("change", (e) => {
-	if (e.target.name === "style" || e.target.id === "noise-type") syncFields();
+	if (e.target.name === "style") syncFields();
 });
 syncFields();
 
 const MAX_SIZE = 4000;
+const NOISE_STYLES = ["white","color","tinted","gaussian","saltpepper","clouds"];
+const BASIC_STYLES = ["solid","hgradient","vgradient","radial","conic","fourcorner"];
+
 function readSize(input) {
 	const n = Number(input.value);
 	return Number.isInteger(n) && n >= 1 && n <= MAX_SIZE ? n : null;
@@ -233,13 +242,13 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		} else if (style === "noise") {
+		} else if (NOISE_STYLES.includes(style)) {
 			setStatus("Generating");
 			await nextPaint();
 			const png = await renderNoisePng({
 				width,
 				height,
-				kind: noiseType.value,
+				kind: style,
 				colorA: color1.value,
 				colorB: color2.value,
 			});
@@ -261,6 +270,18 @@ form.addEventListener("submit", async (events) => {
 					1,
 					Math.min(2000, Math.round(Number($("checker-size").value)) || 40),
 				),
+			});
+			if (format === "png") {
+				bytes = png;
+			} else {
+				setStatus("Loading imagemagick");
+				bytes = convertPng(await loadMagick(), png, format);
+			}
+		} else if (BASIC_STYLES.includes(style)){
+			setStatus("Generating");
+			await nextPaint();
+			const png = renderBasicPng({
+				width,height,kind:style,colors: [color1.value,color2.value,color3.value,color4.value],
 			});
 			if (format === "png") {
 				bytes = png;
