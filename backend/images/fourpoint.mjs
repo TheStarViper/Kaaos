@@ -58,6 +58,60 @@ export function initFourPointEditor({root,widthInput,heightInput}){
     });
 
     function place(){
-        wrap
+        wrap.style.left = `${p.x * 100}%`;
+        wrap.style.top = `${p.y * 100}%`;
+
+        picker.classList.toggle("flip-x",p.x>.5);
+        picker.classList.toggle("flip-y",p.y>.5);
     }
+
+    let drag = null;
+    let swallowClick = false;
+    
+    dot.addEventListener("pointerdown",(e)=>{
+        if (e.button !==0){return;}
+        swallowClick= false;
+        const r = box.getBoundingClientRect();
+        drag = {
+            startX: e.clientX,
+            startY: e.clientY,
+            offX: r.left + p.x *r.width -e.clientX,
+            offY: r.top + p.y *r.height - e.clientY,
+            moved: false,
+        };
+        dot.setPointerCapture(e.pointerId);
+    });
+
+    dot.addEventListener("pointermove",(e)=>{
+        if (!drag) {return;}
+        if (!drag.moved){
+            if (Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) < DRAG_THRESHOLD) return;
+            drag.moved = true;
+            dot.classList.add("is-dragging");
+            customElements.get("color-picker-popper")?.openPicker?.togglePopover(false);
+        }
+
+        const r = box.getBoundingClientRect();
+        p.x = clamp((e.clientX + drag.offX - r.left) / r.width, 0, 1);
+        p.y = clamp((e.clientY + drag.offY - r.top) / r.height, 0, 1);
+        place();
+        renderPreview();
+    });
+
+    const endDrag = (e)=>{
+        if (!drag) return;
+        swallowClick = drag.moved;
+        drag = null;
+        dot.classList.remove("is-dragging");
+        if (dot.hasPointerCapture(e.pointerId)){
+            dot.releasePointerCapture(e.pointerId);
+        }
+    };
+
+    dot.addEventListener("pointerup",endDrag);
+    dot.addEventListener("pointercancel", endDrag);
+
+    dot.addEventListener("click",(e)=>{
+        e
+    })
 }
