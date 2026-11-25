@@ -1,11 +1,9 @@
 import { hexToRgb,pack,sRgbToLinear,linearToSRgb} from "../utils.mjs";
 
-function fourCorner(ctx,width,height,[tl,tr,bl,br]){
+function fourCorner(ctx,width,height,points){
     const image = ctx.createImageData(width,height);
     const px = new Uint32Array(image.data.buffer);
-    const [a,b,c,d] = [tl,tr,bl,br].map(hexToRgb).map(rgb=>rgb.map(sRgbToLinear));
-    const w = Math.max(1,width-1);
-    const h = Math.max(1,height-1);
+    const n 
 
     for (let y = 0;y<height;y++){
         const v = y/h;
