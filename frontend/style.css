@@ -504,6 +504,14 @@ main > .card + .card {
 	background-position: center;
 	background-repeat: no-repeat;
 }
+
+.pill[data-preview="hgradient"] {
+	--preview-bg: url("../assets/previews/images/h-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
 .pill[data-preview="vgradient"] {
 	--preview-bg: url("../assets/previews/images/vert-gradient.png");
 	background-size: 100% 100%;
@@ -514,6 +522,20 @@ main > .card + .card {
 
 .pill[data-preview="radial"] {
 	--preview-bg: url("../assets/previews/images/rad-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="conic"] {
+	--preview-bg: url("../assets/previews/images/conic-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="fourcorner"] {
+	--preview-bg: url("../assets/previews/images/4-corner.png");
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -533,10 +555,46 @@ main > .card + .card {
 	background-repeat: no-repeat;
 }
 
-.pill[data-preview="noise"] {
-	--preview-bg:
-		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"),
-		var(--c1, #351d36);
+.pill[data-preview="white"] {
+	--preview-bg: url("../assets/previews/images/white-noise.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="color"] {
+	--preview-bg: url("../assets/previews/images/colored-noise.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="tinted"] {
+	--preview-bg: url("../assets/previews/images/tinted-noise.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="gaussian"] {
+	--preview-bg: url("../assets/previews/images/gaussian-noise.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="saltpepper"] {
+	--preview-bg: url("../assets/previews/images/s&p.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.pill[data-preview="clouds"] {
+	--preview-bg: url("../assets/previews/images/clouds.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .pill[data-preview="topo"] {
@@ -1044,8 +1102,47 @@ a.btn {
 	transform: scale(1.1);
 }
 
+.style-groups {
+  display: grid;
+  gap: 14px;
+}
+
 .style-group {
     display: block;
     width: 100%;
     margin-bottom: 20px;
+}
+
+.group-label{
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .style-group { grid-template-columns: 1fr; gap: 6px; }
+}
+
+.pill input:disabled{cursor:wait;}
+.pill input:disabled + span{
+	opacity: .55;
+	border-style: dashed;
+}
+
+.pill:has(inpurt:disabled):hover span{
+	color: var(--muted);
+	border-color: var(--border);
+}
+
+.pill input:disabled + span::after{
+	content: "soon";
+	margin-left: 8px;
+	padding: 2px 7px;
+	border-radius: 999px;
+	background: var(--border);
+	font-size: 0.65rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
 }
