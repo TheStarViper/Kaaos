@@ -11,18 +11,15 @@ idk add some more stuff to readme later this is fine for now also those sentence
 todo:
 make custom dropdown component cuz it look out of place
 rip the universal error handling from hanova and put the errors in the default html alerts
-noise do: colored/grayscale/two color
-combine gradient into one gradient and add four corner horizontal/vertical etc
 for conic,radial,and the linear gradients add a bar editor for the gradient and add more colors etc
-conic gradient
+gradient softness slider
 polka dots: size / size variance / frequency
 triangles,checker,hexagon,other tiling
 voronoi
 glitch / scanlines / chromatic abberation (input an image)
 like 10 fractal variants
 wax swirls
-Kaleidoscope x10
-
+Kaleidoscope - a ton of customization
 plasma fractal / plasma fractal blurred
 bi-linear gradient
 

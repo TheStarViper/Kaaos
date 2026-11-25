@@ -3,25 +3,42 @@ import { hexToRgb,pack,sRgbToLinear,linearToSRgb} from "../utils.mjs";
 function fourCorner(ctx,width,height,points){
     const image = ctx.createImageData(width,height);
     const px = new Uint32Array(image.data.buffer);
-    const n 
+    const n = points.length;
+    const X = new Float64Array(n);
+    const Y = new Float64Array(n);
+    const R = new Float64Array(n);
+    const G = new Float64Array(n);
+    const B = new Float64Array(n);
+
+    points.forEach((p,i) => {
+        X[i] = p.x*(width-1);
+        Y[i] = p.y*(height-1);
+        [R[i],G[i],B[i]] = hexToRgb(p.color);
+    });
+
+    const soft = 0.09*Math.hypot(width,height);
+    const s2 = soft*soft;
+    const dy2 = new Float64Array(n);
 
     for (let y = 0;y<height;y++){
-        const v = y/h;
+        for (let i = 0; i < n; i++) dy2[i] = (y - Y[i]) * (y - Y[i]) + s2;
         for (let x = 0; x<width;x++){
-            const u = x/w;
-            const mix = (k)=>{
-                const top = a[k]+(b[k]-a[k])*u;
-                const bottom = c[k] +(d[k]-c[k])*u;
-                const linearVal = top + (bottom-top)*v;
-                return linearToSRgb(linearVal);
-            };
-            px[y*width+x] = pack(mix(0),mix(1),mix(2));
+            let sw = 0, sr = 0, sg = 0, sb = 0;
+            for (let i =0; i<n;i++){
+                const dx = x - X[i];
+                const w = 1/(dx*dx+dy2[i]);
+                sw+=w;
+                sr+=w*R[i];
+                sg+=w*G[i];
+                sb+=w*B[i];
+            }
+            px[y*width+x] = pack(((sr / sw) + 0.5) | 0, ((sg / sw) + 0.5) | 0, ((sb / sw) + 0.5) | 0);
         }
     }
     ctx.putImageData(image,0,0);
 }
 
-export async function renderBasicPng({width,height,kind,colors}){
+export async function renderBasicPng({width,height,kind,colors,points}){
     const [c1,c2] = colors;
     const canvas = document.createElement("canvas");
     canvas.width = width;
@@ -34,7 +51,10 @@ export async function renderBasicPng({width,height,kind,colors}){
 	}
 
     if (kind==="fourcorner"){
-        fourCorner(ctx,width,height,colors);
+        if (!points || points.length < 2) {
+            throw new Error("The gradient points are missing.");
+        }
+        fourCorner(ctx,width,height,points);
     } else {
         let fill;
         if (kind ==="solid"){
