@@ -19,7 +19,7 @@ const color4 = $("img-color4");
 const optionsEl = $("img-options");
 const pickHint = $("img-pick-hint");
 const fieldEls = form.querySelectorAll("[data-styles]");
-const colorLabels = [1,2,3,4].map((n)=>$(`img-color${n}-label`));
+const colorLabels = [1, 2, 3, 4].map((n) => $(`img-color${n}-label`));
 
 //topo vals
 const topoLevels = $("topo-levels");
@@ -31,21 +31,24 @@ for (const range of [topoLevels, topoScale, topoSmooth]) {
 	const out = $(`${range.id}-out`);
 	range.addEventListener("input", () => {
 		out.textContent = range.value;
-		range.style.setProperty("--p", (range.value - range.min) / (range.max - range.min));
+		range.style.setProperty(
+			"--p",
+			(range.value - range.min) / (range.max - range.min),
+		);
 	});
 	range.dispatchEvent(new Event("input"));
 }
 
 function syncPreviewColors() {
 	const root = document.documentElement.style;
-	[color1,color2,color3,color4].forEach((picker,i)=>{
-		root.setProperty(`--c${i+1}`,picker.value);
+	[color1, color2, color3, color4].forEach((picker, i) => {
+		root.setProperty(`--c${i + 1}`, picker.value);
 	});
 }
 
-for (const picker of [color1,color2,color3,color4]){
-	picker.addEventListener("input",syncPreviewColors);
-	picker.addEventListener("change",syncPreviewColors);
+for (const picker of [color1, color2, color3, color4]) {
+	picker.addEventListener("input", syncPreviewColors);
+	picker.addEventListener("change", syncPreviewColors);
 }
 syncPreviewColors();
 
@@ -103,7 +106,7 @@ const COLOR_LABELS = {
 	hgradient: ["Left Color", "Right Color"],
 	vgradient: ["Top Color", "Bottom Color"],
 	radial: ["Center Color", "Edge Color"],
-	conic: ["Color 1","Color 2"],
+	conic: ["Color 1", "Color 2"],
 	fourcorner: ["Top left", "Top right", "Bottom left", "Bottom right"],
 	plasma: ["Color 1", "Color 2"],
 	checker: ["Color 1", "Color 2"],
@@ -123,7 +126,7 @@ function syncFields() {
 	}
 	const labels = COLOR_LABELS[style] || [];
 	colorLabels.forEach((el, i) => {
-		if (el&&labels[i]) {
+		if (el && labels[i]) {
 			el.textContent = labels[i];
 		}
 	});
@@ -135,8 +138,22 @@ form.addEventListener("change", (e) => {
 syncFields();
 
 const MAX_SIZE = 4000;
-const NOISE_STYLES = ["white","color","tinted","gaussian","saltpepper","clouds"];
-const BASIC_STYLES = ["solid","hgradient","vgradient","radial","conic","fourcorner"];
+const NOISE_STYLES = [
+	"white",
+	"color",
+	"tinted",
+	"gaussian",
+	"saltpepper",
+	"clouds",
+];
+const BASIC_STYLES = [
+	"solid",
+	"hgradient",
+	"vgradient",
+	"radial",
+	"conic",
+	"fourcorner",
+];
 
 function readSize(input) {
 	const n = Number(input.value);
@@ -277,14 +294,14 @@ form.addEventListener("submit", async (events) => {
 				setStatus("Loading imagemagick");
 				bytes = convertPng(await loadMagick(), png, format);
 			}
-		} else if (BASIC_STYLES.includes(style)){
+		} else if (BASIC_STYLES.includes(style)) {
 			setStatus("Generating");
 			await nextPaint();
 			const png = await renderBasicPng({
 				width,
 				height,
 				kind: style,
-				colors: [color1.value,color2.value,color3.value,color4.value],
+				colors: [color1.value, color2.value, color3.value, color4.value],
 			});
 			if (format === "png") {
 				bytes = png;

@@ -994,17 +994,17 @@ a.btn {
 }
 
 .style-groups {
-  display: grid;
-  gap: 14px;
+	display: grid;
+	gap: 14px;
 }
 
 .style-group {
-    display: block;
-    width: 100%;
-    margin-bottom: 20px;
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
-.group-label{
+.group-label {
 	font-size: 0.75rem;
 	font-weight: 800;
 	letter-spacing: 0.08em;
@@ -1013,21 +1013,26 @@ a.btn {
 }
 
 @media (max-width: 640px) {
-  .style-group { grid-template-columns: 1fr; gap: 6px; }
+	.style-group {
+		grid-template-columns: 1fr;
+		gap: 6px;
+	}
 }
 
-.pill input:disabled{cursor:wait;}
-.pill input:disabled + span{
-	opacity: .55;
+.pill input:disabled {
+	cursor: wait;
+}
+.pill input:disabled + span {
+	opacity: 0.55;
 	border-style: dashed;
 }
 
-.pill:has(inpurt:disabled):hover span{
+.pill:has(inpurt:disabled):hover span {
 	color: var(--muted);
 	border-color: var(--border);
 }
 
-.pill input:disabled + span::after{
+.pill input:disabled + span::after {
 	content: "soon";
 	margin-left: 8px;
 	padding: 2px 7px;

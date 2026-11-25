@@ -23,11 +23,10 @@ Kaleidoscope - a ton of customization
 plasma fractal / plasma fractal blurred
 bi-linear gradient
 
- docs:
+docs:
 
- audio:
-  idk ab audio synths
+audio:
+idk ab audio synths
 
- video:
-  have multiple visualizer types that take in a file to upload then a bunch of config
-
+video:
+have multiple visualizer types that take in a file to upload then a bunch of config

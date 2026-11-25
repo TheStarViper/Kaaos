@@ -1,4 +1,4 @@
-import { renderToPng } from "../utils.mjs";
+import {renderToPng} from "../utils.mjs";
 
 export async function renderCheckerPng({
 	width,
@@ -17,8 +17,8 @@ export async function renderCheckerPng({
 	t.fillRect(size, 0, size, size);
 	t.fillRect(0, size, size, size);
 
-	return renderToPng(width,height,(ctx)=>{
-		ctx.fillStyle= ctx.createPattern(tile,"repeat");
-		ctx.fillRect(0,0,width,height);
+	return renderToPng(width, height, (ctx) => {
+		ctx.fillStyle = ctx.createPattern(tile, "repeat");
+		ctx.fillRect(0, 0, width, height);
 	});
 }

@@ -1,4 +1,4 @@
-import {hexToRgb,pack} from "../utils.mjs";
+import {hexToRgb, pack} from "../utils.mjs";
 
 const clamp = (v) => (v < 0 ? 0 : v > 255 ? 255 : v | 0);
 

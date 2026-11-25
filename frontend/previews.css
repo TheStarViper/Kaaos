@@ -1,34 +1,52 @@
 /* image previews */
-.pill[data-preview]{
-    background-size: 100% 100%;
+.pill[data-preview] {
+	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
-.pill[data-preview="solid"] {--preview-bg: url("../assets/previews/images/solid.png");}
-.pill[data-preview="hgradient"] {--preview-bg: url("../assets/previews/images/h-gradient.png");}
-.pill[data-preview="vgradient"] {--preview-bg: url("../assets/previews/images/vert-gradient.png");}
-.pill[data-preview="radial"] {--preview-bg: url("../assets/previews/images/rad-gradient.png");}
-.pill[data-preview="conic"] {--preview-bg: url("../assets/previews/images/conic-gradient.png");}
-.pill[data-preview="fourcorner"] {--preview-bg: url("../assets/previews/images/4-corner.png");}
-.pill[data-preview="plasma"] {--preview-bg: url("../assets/previews/images/plasma.png");}
-.pill[data-preview="checker"] {--preview-bg: url("../assets/previews/images/checker.png");}
-.pill[data-preview="white"] {--preview-bg: url("../assets/previews/images/white-noise.png");}
-.pill[data-preview="color"] {--preview-bg: url("../assets/previews/images/colored-noise.png");}
-.pill[data-preview="tinted"] {--preview-bg: url("../assets/previews/images/tinted-noise.png");}
-.pill[data-preview="gaussian"] {--preview-bg: url("../assets/previews/images/gaussian-noise.png");}
-.pill[data-preview="saltpepper"] {--preview-bg: url("../assets/previews/images/s&p.png");}
-.pill[data-preview="clouds"] {--preview-bg: url("../assets/previews/images/clouds.png");}
-.pill[data-preview="topo"] {--preview-bg: url("../assets/previews/images/topo.png");}
-
-
-
-
-
-
-
-
-
-
-
-
+.pill[data-preview="solid"] {
+	--preview-bg: url("../assets/previews/images/solid.png");
+}
+.pill[data-preview="hgradient"] {
+	--preview-bg: url("../assets/previews/images/h-gradient.png");
+}
+.pill[data-preview="vgradient"] {
+	--preview-bg: url("../assets/previews/images/vert-gradient.png");
+}
+.pill[data-preview="radial"] {
+	--preview-bg: url("../assets/previews/images/rad-gradient.png");
+}
+.pill[data-preview="conic"] {
+	--preview-bg: url("../assets/previews/images/conic-gradient.png");
+}
+.pill[data-preview="fourcorner"] {
+	--preview-bg: url("../assets/previews/images/4-corner.png");
+}
+.pill[data-preview="plasma"] {
+	--preview-bg: url("../assets/previews/images/plasma.png");
+}
+.pill[data-preview="checker"] {
+	--preview-bg: url("../assets/previews/images/checker.png");
+}
+.pill[data-preview="white"] {
+	--preview-bg: url("../assets/previews/images/white-noise.png");
+}
+.pill[data-preview="color"] {
+	--preview-bg: url("../assets/previews/images/colored-noise.png");
+}
+.pill[data-preview="tinted"] {
+	--preview-bg: url("../assets/previews/images/tinted-noise.png");
+}
+.pill[data-preview="gaussian"] {
+	--preview-bg: url("../assets/previews/images/gaussian-noise.png");
+}
+.pill[data-preview="saltpepper"] {
+	--preview-bg: url("../assets/previews/images/s&p.png");
+}
+.pill[data-preview="clouds"] {
+	--preview-bg: url("../assets/previews/images/clouds.png");
+}
+.pill[data-preview="topo"] {
+	--preview-bg: url("../assets/previews/images/topo.png");
+}
