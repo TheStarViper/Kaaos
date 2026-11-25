@@ -1,6 +1,6 @@
 import {hexToRgb, pack, sRgbToLinear, linearToSRgb} from "../utils.mjs";
 
-function fourCorner(ctx, width, height, points) {
+export function drawFourPoint(ctx, width, height, points) {
 	const image = ctx.createImageData(width, height);
 	const px = new Uint32Array(image.data.buffer);
 	const n = points.length;
@@ -61,7 +61,7 @@ export async function renderBasicPng({width, height, kind, colors, points}) {
 		if (!points || points.length < 2) {
 			throw new Error("The gradient points are missing.");
 		}
-		fourCorner(ctx, width, height, points);
+		drawFourPoint(ctx, width, height, points);
 	} else {
 		let fill;
 		if (kind === "solid") {
