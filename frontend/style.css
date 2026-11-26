@@ -1128,3 +1128,29 @@ a.btn {
 	top: auto;
 	bottom: 20px;
 }
+
+
+.fp-lines{
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	pointer-events: none;
+}
+
+.fp-lines polygon{
+	fill:none;
+	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
+}
+
+.fp-line-outline{
+	stroke: rgba(0,0,0,0.35);
+	stroke-width: 4px;
+}
+
+.fp-line{
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
