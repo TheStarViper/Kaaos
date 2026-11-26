@@ -2,7 +2,7 @@ import {renderTopoPng} from "./topo.mjs";
 import {renderCheckerPng} from "./checker.mjs";
 import {renderNoisePng} from "./noise.mjs";
 import {renderBasicPng} from "./gradients.mjs";
-import { initFourPointEditor } from "./fourpoint.mjs";
+import {initFourPointEditor} from "./fourpoint.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -18,7 +18,7 @@ const color2 = $("img-color2");
 const optionsEl = $("img-options");
 const pickHint = $("img-pick-hint");
 const fieldEls = form.querySelectorAll("[data-styles]");
-const colorLabels = [1, 2,].map((n) => $(`img-color${n}-label`));
+const colorLabels = [1, 2].map((n) => $(`img-color${n}-label`));
 
 //topo vals
 const topoLevels = $("topo-levels");
