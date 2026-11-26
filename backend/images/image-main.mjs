@@ -2,6 +2,7 @@ import {renderTopoPng} from "./topo.mjs";
 import {renderCheckerPng} from "./checker.mjs";
 import {renderNoisePng} from "./noise.mjs";
 import {renderBasicPng} from "./gradients.mjs";
+import { initFourPointEditor } from "./fourpoint.mjs";
 
 const $ = (id) => document.getElementById(id);
 
@@ -14,12 +15,10 @@ const meta = $("img-meta");
 const download = $("img-download");
 const color1 = $("img-color1");
 const color2 = $("img-color2");
-const color3 = $("img-color3");
-const color4 = $("img-color4");
 const optionsEl = $("img-options");
 const pickHint = $("img-pick-hint");
 const fieldEls = form.querySelectorAll("[data-styles]");
-const colorLabels = [1, 2, 3, 4].map((n) => $(`img-color${n}-label`));
+const colorLabels = [1, 2,].map((n) => $(`img-color${n}-label`));
 
 //topo vals
 const topoLevels = $("topo-levels");
@@ -41,16 +40,22 @@ for (const range of [topoLevels, topoScale, topoSmooth]) {
 
 function syncPreviewColors() {
 	const root = document.documentElement.style;
-	[color1, color2, color3, color4].forEach((picker, i) => {
+	[color1, color2].forEach((picker, i) => {
 		root.setProperty(`--c${i + 1}`, picker.value);
 	});
 }
 
-for (const picker of [color1, color2, color3, color4]) {
+for (const picker of [color1, color2]) {
 	picker.addEventListener("input", syncPreviewColors);
 	picker.addEventListener("change", syncPreviewColors);
 }
 syncPreviewColors();
+
+const fourPoint = initFourPointEditor({
+	root: $("fp-editor"),
+	widthInput: $("img-width"),
+	heightInput: $("img-height"),
+});
 
 const MIME = {
 	png: "image/png",
@@ -107,7 +112,6 @@ const COLOR_LABELS = {
 	vgradient: ["Top Color", "Bottom Color"],
 	radial: ["Center Color", "Edge Color"],
 	conic: ["Color 1", "Color 2"],
-	fourcorner: ["Top left", "Top right", "Bottom left", "Bottom right"],
 	plasma: ["Color 1", "Color 2"],
 	checker: ["Color 1", "Color 2"],
 	tinted: ["Base color"],
@@ -301,7 +305,8 @@ form.addEventListener("submit", async (events) => {
 				width,
 				height,
 				kind: style,
-				colors: [color1.value, color2.value, color3.value, color4.value],
+				colors: [color1.value, color2.value],
+				points: fourPoint.getPoints(),
 			});
 			if (format === "png") {
 				bytes = png;

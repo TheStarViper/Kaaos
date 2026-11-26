@@ -246,7 +246,13 @@ class ColorPickerPopover extends HTMLElement {
 	render() {
 		this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="style.css">
-
+	  <style>
+        /* popover-only: no button of its own; opened from outside (the gradient dots) */
+        :host([popover-only]) .color-picker-trigger { display: none; }
+        :host([popover-only]) .color-picker-popover { top: 20px; }
+        :host([popover-only].flip-x) .color-picker-popover { left: auto; right: 0; }
+        :host([popover-only].flip-y) .color-picker-popover { top: auto; bottom: 20px; }
+      </style>
       <div class="color-picker-popover-wrapper" id="wrapper">
         <button type="button" class="color-picker-trigger" id="trigger" aria-haspopup="true" aria-expanded="false">
           <span class="color-preview-swatch" id="preview-swatch"></span>

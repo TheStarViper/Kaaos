@@ -258,8 +258,13 @@
 							</div>
 						</div>
 						<div class="form-grid">
+							<div class="fp-editor" id="fp-editor" data-styles="fourcorner">
+								<span class="field-label">Gradient Points</span>
+								<div class="fp-box"><canvas class="fp-canvas"></canvas></div>
+								<p class="hint">Drag a dot / arrow keys to move it. Click a dot to change its colour.</p>
+							</div>
 							<div
-								data-styles="solid hgradient vgradient radial conic fourcorner plasma tinted clouds topo checker"
+								data-styles="solid hgradient vgradient radial conic plasma tinted clouds topo checker"
 							>
 								<label
 									class="field-label"
@@ -274,7 +279,7 @@
 								></color-picker-popover>
 							</div>
 							<div
-								data-styles="hgradient vgradient radial conic fourcorner plasma clouds topo checker"
+								data-styles="hgradient vgradient radial conic plasma clouds topo checker"
 							>
 								<label
 									class="field-label"
@@ -286,32 +291,6 @@
 								<color-picker-popover
 									id="img-color2"
 									value="#f77fe9"
-								></color-picker-popover>
-							</div>
-							<div data-styles="fourcorner">
-								<label
-									class="field-label"
-									id="img-color3-label"
-									for="img-color3"
-								>
-									Bottom left
-								</label>
-								<color-picker-popover
-									id="img-color3"
-									value="#2f7fe0"
-								></color-picker-popover>
-							</div>
-							<div data-styles="fourcorner">
-								<label
-									class="field-label"
-									id="img-color4-label"
-									for="img-color4"
-								>
-									Bottom right
-								</label>
-								<color-picker-popover
-									id="img-color4"
-									value="#00f5d4"
 								></color-picker-popover>
 							</div>
 							<div data-styles="checker">

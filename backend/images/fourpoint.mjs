@@ -15,7 +15,7 @@ export function initFourPointEditor({root,widthInput,heightInput}){
     const box = root.querySelector(".fp-box");
     const canvas = box.querySelector(".fp-canvas");
     const ctx = canvas.getContext("2d");
-    const points = Defaults.map((p)=>({...p}));
+    const points = DEFAULTS.map((p)=>({...p}));
 
     function aspect(){
         const w = Number(widthInput.value);
@@ -35,108 +35,116 @@ export function initFourPointEditor({root,widthInput,heightInput}){
         points.forEach((p,i)=>document.documentElement.style.setProperty(`--p${i + 1}`, p.color));
     }
 
-    dots.forEach((p,i)=>{
+    points.forEach((p,i)=>{
         const wrap = document.createElement("div");
         wrap.className = "fp-dot-wrap";
 
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className= "fp-dot";
-        dot.setAttribute("aria-label",`Gradient point ${i + 1}. Drag to move, click to change its colour.`);
+        dot.setAttribute("aria-label",`Gradient point ${i + 1}. Drag to move, click to change its color.`);
         dot.style.setProperty("--dot",p.color);
 
         const picker = document.createElement("color-picker-popover");
-        picker.className = "no-trigger";
-        picker.setAttribute("value",p.color);
-        picker.addEventListener("change",(e)=>{
-            if (!e.detail || e.detail.value) {return;}
-            p.color = e.detail.value;
-            dot.style.setProperty("--dot",p.color);
+        picker.setAttribute("popover-only", "");
+        picker.setAttribute("value", p.color);
+        Object.assign(picker.style, { position: "absolute", left: "0", top: "0", width: "0", height: "0", display: "block" });
+
+            function syncFromPicker() {
+            const value = picker.value;
+            if (!value || value === p.color) return;
+            p.color = value;
+            dot.style.setProperty("--dot", value);
             renderPreview();
             publishColors();
+            }
+            for (const type of ["change", "input", "click", "pointerup", "keyup", "focusout"]) {
+            picker.addEventListener(type, syncFromPicker);
+            }
+        function place(){
+            wrap.style.left = `${p.x * 100}%`;
+            wrap.style.top = `${p.y * 100}%`;
+
+            picker.classList.toggle("flip-x",p.x>.5);
+            picker.classList.toggle("flip-y",p.y>.5);
+        }
+
+        let drag = null;
+        let swallowClick = false;
+        
+        dot.addEventListener("pointerdown",(e)=>{
+            if (e.button !==0){return;}
+            swallowClick= false;
+            const r = box.getBoundingClientRect();
+            drag = {
+                startX: e.clientX,
+                startY: e.clientY,
+                offX: r.left + p.x *r.width -e.clientX,
+                offY: r.top + p.y *r.height - e.clientY,
+                moved: false,
+            };
+            dot.setPointerCapture(e.pointerId);
         });
-    });
 
-    function place(){
-        wrap.style.left = `${p.x * 100}%`;
-        wrap.style.top = `${p.y * 100}%`;
+        dot.addEventListener("pointermove",(e)=>{
+            if (!drag) {return;}
+            if (!drag.moved){
+                if (Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) < DRAG_THRESHOLD) return;
+                drag.moved = true;
+                dot.classList.add("is-dragging");
+                customElements.get("color-picker-popper")?.openPicker?.togglePopover(false);
+            }
 
-        picker.classList.toggle("flip-x",p.x>.5);
-        picker.classList.toggle("flip-y",p.y>.5);
-    }
+            const r = box.getBoundingClientRect();
+            p.x = clamp((e.clientX + drag.offX - r.left) / r.width, 0, 1);
+            p.y = clamp((e.clientY + drag.offY - r.top) / r.height, 0, 1);
+            place();
+            renderPreview();
+        });
 
-    let drag = null;
-    let swallowClick = false;
-    
-    dot.addEventListener("pointerdown",(e)=>{
-        if (e.button !==0){return;}
-        swallowClick= false;
-        const r = box.getBoundingClientRect();
-        drag = {
-            startX: e.clientX,
-            startY: e.clientY,
-            offX: r.left + p.x *r.width -e.clientX,
-            offY: r.top + p.y *r.height - e.clientY,
-            moved: false,
+        const endDrag = (e)=>{
+            if (!drag) return;
+            swallowClick = drag.moved;
+            drag = null;
+            dot.classList.remove("is-dragging");
+            if (dot.hasPointerCapture(e.pointerId)){
+                dot.releasePointerCapture(e.pointerId);
+            }
         };
-        dot.setPointerCapture(e.pointerId);
-    });
 
-    dot.addEventListener("pointermove",(e)=>{
-        if (!drag) {return;}
-        if (!drag.moved){
-            if (Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) < DRAG_THRESHOLD) return;
-            drag.moved = true;
-            dot.classList.add("is-dragging");
-            customElements.get("color-picker-popper")?.openPicker?.togglePopover(false);
-        }
+        dot.addEventListener("pointerup",endDrag);
+        dot.addEventListener("pointercancel", endDrag);
 
-        const r = box.getBoundingClientRect();
-        p.x = clamp((e.clientX + drag.offX - r.left) / r.width, 0, 1);
-        p.y = clamp((e.clientY + drag.offY - r.top) / r.height, 0, 1);
+        dot.addEventListener("click",(e)=>{
+            e.stopPropagation();
+            if (swallowClick){
+                swallowClick = false;
+                return;
+            }
+            picker.togglePopover?.();
+        });
+
+        dot.addEventListener("keydown",(e)=>{
+            const step = e.shiftKey ? 0.05 : 0.01;
+            const move = {
+                ArrowLeft: [-step, 0], 
+                ArrowRight: [step, 0],
+                ArrowUp: [0, -step], 
+                ArrowDown: [0, step] }[e.key];
+
+            if (!move){
+                return;
+            }
+
+            e.preventDefault();
+            p.x = clamp(p.x+move[0],0,1);
+            p.y = clamp(p.y+move[1],0,1);
+            place();
+            renderPreview();
+        });
+        wrap.append(dot, picker);
+        box.append(wrap);
         place();
-        renderPreview();
-    });
-
-    const endDrag = (e)=>{
-        if (!drag) return;
-        swallowClick = drag.moved;
-        drag = null;
-        dot.classList.remove("is-dragging");
-        if (dot.hasPointerCapture(e.pointerId)){
-            dot.releasePointerCapture(e.pointerId);
-        }
-    };
-
-    dot.addEventListener("pointerup",endDrag);
-    dot.addEventListener("pointercancel", endDrag);
-
-    dot.addEventListener("click",(e)=>{
-        e.stopPropagation();
-        if (swallowClick){
-            swallowClick = false;
-            return;
-        }
-        picker.togglePopover?.();
-    });
-
-    dot.addEventListener("keydown",(e)=>{
-        const step = e.shiftKey ? 0.05 : 0.01;
-        const move = {
-            ArrowLeft: [-step, 0], 
-            ArrowRight: [step, 0],
-            ArrowUp: [0, -step], 
-            ArrowDown: [0, step] }[e.key];
-
-        if (!move){
-            return;
-        }
-
-        e.preventDefault();
-        p.x = clamp(p.x+move[0],0,1);
-        p.y = clamp(p.y+move[1],0,1);
-        place();
-        renderPreview();
     });
 
     widthInput.addEventListener("input",renderPreview);
