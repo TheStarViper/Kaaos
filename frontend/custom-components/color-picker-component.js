@@ -245,7 +245,7 @@ class ColorPickerPopover extends HTMLElement {
 
 	render() {
 		this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="./styling/style.css" />
 	  <style>
         /* popover-only: no button of its own; opened from outside (the gradient dots) */
         :host([popover-only]) .color-picker-trigger { display: none; }

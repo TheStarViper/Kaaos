@@ -85,13 +85,13 @@ body::before {
 	inset: 0;
 	z-index: -1;
 	pointer-events: none;
-	background: url("../assets/topo-light.svg") center / cover no-repeat;
+	background: url("/assets/topo-light.svg") center / cover no-repeat;
 	opacity: var(--topo-opacity);
 }
 
 @media (prefers-color-scheme: dark) {
 	body::before {
-		background-image: url("../assets/topo-dark.svg");
+		background-image: url("/assets/topo-dark.svg");
 	}
 }
 a {

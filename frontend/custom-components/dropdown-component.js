@@ -211,7 +211,7 @@ class CustomDropdown extends HTMLElement {
 
 	render() {
 		this.shadowRoot.innerHTML = `
-			<link rel="stylesheet" href="style.css">
+			<link rel="stylesheet" href="./styling/style.css" />
 			<style>
 				:host {
 					display: inline-block;

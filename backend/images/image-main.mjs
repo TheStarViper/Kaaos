@@ -342,8 +342,8 @@ form.addEventListener("submit", async (events) => {
 		download.href = objectUrl;
 		download.download = filename;
 		meta.textContent =
-			`${filename} · ${width}×${height} · ${(blob.size / 1024).toFixed(1)} KB` +
-			(seedUsed !== null ? ` · seed ${seedUsed}` : "") +
+			`${filename} | ${width}×${height} | ${(blob.size / 1024).toFixed(1)} KB` +
+			(seedUsed !== null ? ` | seed ${seedUsed}` : "") +
 			(format === "tiff"
 				? " · browsers can't preview TIFF, but the download works"
 				: "");

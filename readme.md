@@ -24,10 +24,12 @@ plasma fractal / plasma fractal blurred
 bi-linear gradient
 auto generate
 
+
 docs:
 
 audio:
 idk ab audio synths
 
 video:
+custom file drop zone component
 have multiple visualizer types that take in a file to upload then a bunch of config

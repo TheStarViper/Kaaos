@@ -11,7 +11,7 @@
 			href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="./styling/style.css" />
 		<script src="navigation.js" defer></script>
 	</head>
 	<body>
@@ -78,11 +78,11 @@
 					</div>
 					<div>
 						<label class="field-label" for="file-size">Aprrox. Size</label>
-						<select class="input" id="file-size">
+						<custom-dropdown id="file-size">
 							<option>Small</option>
 							<option selected>Medium</option>
 							<option>Large</option>
-						</select>
+						</custom-dropdown>
 					</div>
 				</div>
 
@@ -114,6 +114,8 @@
 				</a>
 			</section>
 		</main>
+
+		<script type="module" src="./custom-components/dropdown-component.js" defer></script>
 
 		<footer class="site-footer">
 			<p>Kaaos</p>
