@@ -220,52 +220,40 @@
 					</div>
 
 					<div class="form-stack" id="img-options" hidden>
-						<div class="form-grid">
+						<div class="options-split">
+							<div class="fp-editor" id="fp-editor" data-styles="fourcorner">
+								<span class="field-label">Gradient points</span>
+								<div class="fp-box"><canvas class="fp-canvas"></canvas></div>
+								<p class="hint">Drag a dot to move it. Click a dot to change its color.</p>
+							</div>
+
+							<div class="form-grid options-side">
 							<div>
 								<label class="field-label" for="img-width">Width (px)</label>
-								<input
-									class="input"
-									id="img-width"
-									type="number"
-									min="1"
-									max="4000"
-									value="800"
-									required
-								/>
+								<input class="input" id="img-width" type="number" min="1" max="4000" value="800" required>
 							</div>
 							<div>
 								<label class="field-label" for="img-height">Height (px)</label>
-								<input
-									class="input"
-									id="img-height"
-									type="number"
-									min="1"
-									max="4000"
-									value="600"
-									required
-								/>
+								<input class="input" id="img-height" type="number" min="1" max="4000" value="600" required>
 							</div>
 							<div>
 								<label class="field-label" for="img-format">Format</label>
 								<select class="input" id="img-format">
-									<option value="png">PNG</option>
-									<option value="jpg">JPEG</option>
-									<option value="webp">WebP</option>
-									<option value="gif">GIF</option>
-									<option value="bmp">BMP</option>
-									<option value="tiff">TIFF</option>
+								<option value="png">PNG</option>
+								<option value="jpg">JPEG</option>
+								<option value="webp">WebP</option>
+								<option value="gif">GIF</option>
+								<option value="bmp">BMP</option>
+								<option value="tiff">TIFF</option>
 								</select>
+							</div>
+							<div>
+								<label class="field-label" for="img-name">File name</label>
+								<input class="input" id="img-name" type="text" placeholder="lorem-ipsum">
+							</div>
 							</div>
 						</div>
 						<div class="form-grid">
-							<div class="fp-editor" id="fp-editor" data-styles="fourcorner">
-								<span class="field-label">Gradient Points</span>
-								<div class="fp-box"><canvas class="fp-canvas"></canvas></div>
-								<p class="hint">
-									Drag a dot / arrow keys to move it. Click a dot to change its
-									colour.
-								</p>
-							</div>
 							<div
 								data-styles="solid hgradient vgradient radial conic plasma tinted clouds topo checker"
 							>
@@ -307,15 +295,6 @@
 									min="1"
 									max="2000"
 									value="40"
-								/>
-							</div>
-							<div>
-								<label class="field-label" for="img-name">File name</label>
-								<input
-									class="input"
-									id="img-name"
-									type="text"
-									placeholder="Kaaos File"
 								/>
 							</div>
 						</div>

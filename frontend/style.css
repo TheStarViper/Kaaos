@@ -1154,3 +1154,26 @@ a.btn {
 	stroke: #fff;
 	stroke-width: 1.5px;
 }
+
+.options-split {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.options-split:has(.fp-editor:not([hidden])) {
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 240px);
+}
+
+.options-split:has(.fp-editor:not([hidden])) .options-side {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 720px) {
+  .options-split:has(.fp-editor:not([hidden])) {
+    grid-template-columns: 1fr;
+  }
+  .options-split:has(.fp-editor:not([hidden])) .options-side {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
