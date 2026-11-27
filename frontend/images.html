@@ -224,33 +224,58 @@
 							<div class="fp-editor" id="fp-editor" data-styles="fourcorner">
 								<span class="field-label">Gradient points</span>
 								<div class="fp-box"><canvas class="fp-canvas"></canvas></div>
-								<p class="hint">Drag a dot to move it. Click a dot to change its color.</p>
+								<p class="hint">
+									Drag a dot to move it. Click a dot to change its color.
+								</p>
 							</div>
 
 							<div class="form-grid options-side">
-							<div>
-								<label class="field-label" for="img-width">Width (px)</label>
-								<input class="input" id="img-width" type="number" min="1" max="4000" value="800" required>
-							</div>
-							<div>
-								<label class="field-label" for="img-height">Height (px)</label>
-								<input class="input" id="img-height" type="number" min="1" max="4000" value="600" required>
-							</div>
-							<div>
-								<label class="field-label" for="img-format">Format</label>
-								<custom-dropdown id="img-format">
-									<option value="png">PNG</option>
-									<option value="jpg">JPEG</option>
-									<option value="webp">WebP</option>
-									<option value="gif">GIF</option>
-									<option value="bmp">BMP</option>
-									<option value="tiff">TIFF</option>
-								</custom-dropdown>
-							</div>
-							<div>
-								<label class="field-label" for="img-name">File name</label>
-								<input class="input" id="img-name" type="text" placeholder="lorem-ipsum">
-							</div>
+								<div>
+									<label class="field-label" for="img-width">Width (px)</label>
+									<input
+										class="input"
+										id="img-width"
+										type="number"
+										min="1"
+										max="4000"
+										value="800"
+										required
+									/>
+								</div>
+								<div>
+									<label class="field-label" for="img-height">
+										Height (px)
+									</label>
+									<input
+										class="input"
+										id="img-height"
+										type="number"
+										min="1"
+										max="4000"
+										value="600"
+										required
+									/>
+								</div>
+								<div>
+									<label class="field-label" for="img-format">Format</label>
+									<custom-dropdown id="img-format">
+										<option value="png">PNG</option>
+										<option value="jpg">JPEG</option>
+										<option value="webp">WebP</option>
+										<option value="gif">GIF</option>
+										<option value="bmp">BMP</option>
+										<option value="tiff">TIFF</option>
+									</custom-dropdown>
+								</div>
+								<div>
+									<label class="field-label" for="img-name">File name</label>
+									<input
+										class="input"
+										id="img-name"
+										type="text"
+										placeholder="lorem-ipsum"
+									/>
+								</div>
 							</div>
 						</div>
 						<div class="form-grid">
@@ -408,7 +433,7 @@
 		<script type="module" src="/backend/images/image-main.mjs"></script>
 		<script type="module" src="color-picker-component.js" defer></script>
 		<script type="module" src="dropdown-component.js" defer></script>
-		
+
 		<footer>
 			<p>Kaaos</p>
 		</footer>

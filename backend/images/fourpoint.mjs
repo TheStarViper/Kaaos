@@ -7,7 +7,7 @@ const DEFAULTS = [
 	{x: 0.88, y: 0.85, color: "#00f5d4"},
 ];
 
-const LOOP = [0,1,3,2];
+const LOOP = [0, 1, 3, 2];
 const DRAG_THRESHOLD = 4; //4px
 const PREVIEW_WIDTH = 160;
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -32,23 +32,25 @@ export function initFourPointEditor({root, widthInput, heightInput}) {
 		drawFourPoint(ctx, canvas.width, canvas.height, points);
 	}
 
-    const SVG_NS = "http://www.w3.org/2000/svg";
-    const lines = document.createElementNS(SVG_NS, "svg");
-    lines.setAttribute("class", "fp-lines");
-    lines.setAttribute("viewBox", "0 0 100 100");
-    lines.setAttribute("preserveAspectRatio", "none");
-    const outline = document.createElementNS(SVG_NS, "polygon");
-    outline.setAttribute("class", "fp-line-outline");
-    const line = document.createElementNS(SVG_NS, "polygon");
-    line.setAttribute("class", "fp-line");
-    lines.append(outline, line);
-    box.insertBefore(lines, canvas.nextSibling);
+	const SVG_NS = "http://www.w3.org/2000/svg";
+	const lines = document.createElementNS(SVG_NS, "svg");
+	lines.setAttribute("class", "fp-lines");
+	lines.setAttribute("viewBox", "0 0 100 100");
+	lines.setAttribute("preserveAspectRatio", "none");
+	const outline = document.createElementNS(SVG_NS, "polygon");
+	outline.setAttribute("class", "fp-line-outline");
+	const line = document.createElementNS(SVG_NS, "polygon");
+	line.setAttribute("class", "fp-line");
+	lines.append(outline, line);
+	box.insertBefore(lines, canvas.nextSibling);
 
-    function drawLines() {
-        const path = LOOP.map((i) => `${points[i].x * 100},${points[i].y * 100}`).join(" ");
-        outline.setAttribute("points", path);
-        line.setAttribute("points", path);
-    }
+	function drawLines() {
+		const path = LOOP.map(
+			(i) => `${points[i].x * 100},${points[i].y * 100}`,
+		).join(" ");
+		outline.setAttribute("points", path);
+		line.setAttribute("points", path);
+	}
 
 	function publishColors() {
 		points.forEach((p, i) =>
@@ -103,7 +105,7 @@ export function initFourPointEditor({root, widthInput, heightInput}) {
 			wrap.style.left = `${p.x * 100}%`;
 			wrap.style.top = `${p.y * 100}%`;
 
-            drawLines();
+			drawLines();
 
 			picker.classList.toggle("flip-x", p.x > 0.5);
 			picker.classList.toggle("flip-y", p.y > 0.5);

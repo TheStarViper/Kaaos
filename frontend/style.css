@@ -1129,8 +1129,7 @@ a.btn {
 	bottom: 20px;
 }
 
-
-.fp-lines{
+.fp-lines {
 	position: absolute;
 	inset: 0;
 	width: 100%;
@@ -1139,41 +1138,41 @@ a.btn {
 	pointer-events: none;
 }
 
-.fp-lines polygon{
-	fill:none;
+.fp-lines polygon {
+	fill: none;
 	stroke-linejoin: round;
 	vector-effect: non-scaling-stroke;
 }
 
-.fp-line-outline{
-	stroke: rgba(0,0,0,0.35);
+.fp-line-outline {
+	stroke: rgba(0, 0, 0, 0.35);
 	stroke-width: 4px;
 }
 
-.fp-line{
+.fp-line {
 	stroke: #fff;
 	stroke-width: 1.5px;
 }
 
 .options-split {
-  display: grid;
-  gap: 20px;
-  align-items: start;
+	display: grid;
+	gap: 20px;
+	align-items: start;
 }
 
 .options-split:has(.fp-editor:not([hidden])) {
-  grid-template-columns: minmax(0, 1fr) minmax(170px, 240px);
+	grid-template-columns: minmax(0, 1fr) minmax(170px, 240px);
 }
 
 .options-split:has(.fp-editor:not([hidden])) .options-side {
-  grid-template-columns: 1fr;
+	grid-template-columns: 1fr;
 }
 
 @media (max-width: 720px) {
-  .options-split:has(.fp-editor:not([hidden])) {
-    grid-template-columns: 1fr;
-  }
-  .options-split:has(.fp-editor:not([hidden])) .options-side {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
+	.options-split:has(.fp-editor:not([hidden])) {
+		grid-template-columns: 1fr;
+	}
+	.options-split:has(.fp-editor:not([hidden])) .options-side {
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	}
 }
