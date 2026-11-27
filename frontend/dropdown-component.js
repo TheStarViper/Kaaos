@@ -207,8 +207,139 @@ class CustomDropdown extends HTMLElement{
 
     render(){
         this.shadowRoot.innerHTML = `
-            
-        `;
+			<link rel="stylesheet" href="style.css">
+			<style>
+				:host {
+					display: inline-block;
+					width: 100%;
+				}
+
+				.dropdown-popover-wrapper {
+					position: relative;
+					width: 100%;
+				}
+
+				.dropdown-trigger {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 10px;
+					width: 100%;
+					padding: 10px 14px;
+					background: var(--surface-2);
+					border: 1px solid var(--border);
+					border-radius: var(--radius-md);
+					color: var(--text);
+					font: inherit;
+					font-weight: 600;
+					cursor: pointer;
+					transition: border-color 0.15s ease, background 0.15s ease;
+				}
+
+				.dropdown-trigger:hover {
+					border-color: var(--accent);
+				}
+
+				.dropdown-trigger:focus-visible {
+					outline: 2px solid var(--accent-strong);
+					outline-offset: 2px;
+				}
+
+				.chevron-icon {
+					flex-shrink: 0;
+					color: var(--muted);
+					transition: transform 0.2s ease;
+				}
+
+				.dropdown-popover-wrapper.is-open .chevron-icon {
+					transform: rotate(180deg);
+				}
+
+				.dropdown-popover {
+					position: absolute;
+					top: calc(100% + 8px);
+					left: 0;
+					right: 0;
+					z-index: 100;
+					padding: 6px;
+					background: var(--surface);
+					border: 1px solid var(--border);
+					border-radius: var(--radius-md);
+					box-shadow: var(--shadow);
+					opacity: 0;
+					visibility: hidden;
+					transform: translateY(-8px) scale(0.97);
+					pointer-events: none;
+					transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+					max-height: 240px;
+					overflow-y: auto;
+				}
+
+				.dropdown-popover-wrapper.is-open .dropdown-popover {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0) scale(1);
+					pointer-events: auto;
+					z-index: 1000;
+				}
+
+				.dropdown-item {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					width: 100%;
+					padding: 8px 12px;
+					border: 0;
+					border-radius: calc(var(--radius-md) - 4px);
+					background: transparent;
+					color: var(--muted);
+					font: inherit;
+					font-weight: 600;
+					font-size: 0.95rem;
+					text-align: left;
+					cursor: pointer;
+					transition: background 0.15s ease, color 0.15s ease;
+				}
+
+				.dropdown-item:hover,
+				.dropdown-item:focus-visible {
+					background: var(--surface-2);
+					color: var(--text);
+					outline: none;
+				}
+
+				.dropdown-item.is-selected {
+					background: var(--accent);
+					color: var(--accent-text);
+				}
+
+				.check-icon {
+					opacity: 0;
+				}
+
+				.dropdown-item.is-selected .check-icon {
+					opacity: 1;
+				}
+
+				.dropdown-item:disabled {
+					opacity: 0.45;
+					cursor: not-allowed;
+				}
+			</style>
+
+			<div class="dropdown-popover-wrapper" id="wrapper">
+				<button type="button" class="dropdown-trigger" id="trigger" aria-haspopup="listbox" aria-expanded="false">
+					<span id="trigger-label">Select option...</span>
+					<svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="6 9 12 15 18 9"></polyline>
+					</svg>
+				</button>
+
+				<div class="dropdown-popover" id="popover" role="listbox">
+					<div id="options-container"></div>
+				</div>
+			</div>
+		`;
     }
 }
 
