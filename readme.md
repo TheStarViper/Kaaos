@@ -22,6 +22,7 @@ wax swirls
 Kaleidoscope - a ton of customization
 plasma fractal / plasma fractal blurred
 bi-linear gradient
+auto generate
 
 docs:
 
